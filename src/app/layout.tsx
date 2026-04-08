@@ -6,7 +6,7 @@ import { Footer } from "@/components/footer";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
-  weight: ["400", "700"],
+  weight: ["300", "400", "500", "600", "700"],
   variable: "--font-dm-sans",
 });
 
@@ -16,7 +16,10 @@ export const metadata: Metadata = {
     template: "%s | Dois Labs",
   },
   description:
-    "Produtos digitais automatizados que rodam sozinhos. Feito por Leo e Otavio.",
+    "Produtos digitais automatizados que rodam sozinhos. Feito por Leo e Otávio.",
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({

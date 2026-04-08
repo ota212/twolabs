@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { Logo } from "./logo";
 
 export function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -9,8 +10,8 @@ export function Navbar() {
   return (
     <nav className="bg-navy text-white">
       <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-        <Link href="/" className="text-xl font-bold tracking-tight">
-          Dois Labs
+        <Link href="/" aria-label="Dois Labs — Home">
+          <Logo variant="light" height={28} />
         </Link>
 
         {/* Desktop links */}

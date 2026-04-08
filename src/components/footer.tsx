@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Logo } from "./logo";
 
 export function Footer() {
   return (
@@ -6,7 +7,9 @@ export function Footer() {
       <div className="max-w-6xl mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
-            <p className="text-white font-bold text-lg mb-2">Dois Labs</p>
+            <div className="mb-3">
+              <Logo variant="light" height={24} />
+            </div>
             <p className="text-sm">Produtos digitais que rodam sozinhos.</p>
           </div>
 
