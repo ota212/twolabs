@@ -57,7 +57,7 @@ export default async function Home() {
         <div className="max-w-6xl mx-auto px-4 py-16 md:py-24 text-center">
           <h2 className="text-2xl md:text-3xl font-bold mb-4">Dois Labs</h2>
           <p className="text-navy/70 max-w-2xl mx-auto text-lg">
-            Somos Leo e Otávio. Construímos produtos digitais automatizados que
+            Construímos produtos digitais automatizados que
             resolvem problemas reais — sem enrolação.
           </p>
         </div>

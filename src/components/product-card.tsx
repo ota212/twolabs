@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Product } from "@/types";
 import { formatPrice, isNew } from "@/lib/utils";
+import { PRODUCT_CONTENT } from "@/lib/product-content";
 
 export function ProductCard({ product }: { product: Product }) {
   return (
@@ -8,12 +9,12 @@ export function ProductCard({ product }: { product: Product }) {
       href={`/produtos/${product.slug}`}
       className="group block bg-white rounded-lg overflow-hidden border border-navy/5 hover:border-electric-blue/30 transition-colors"
     >
-      <div className="aspect-[4/3] bg-navy/5 relative">
-        {product.image_url ? (
+      <div className="aspect-[4/3] bg-navy/5 relative overflow-hidden">
+        {(product.image_url || PRODUCT_CONTENT[product.slug]?.heroImage) ? (
           <img
-            src={product.image_url}
+            src={product.image_url ?? PRODUCT_CONTENT[product.slug]?.heroImage}
             alt={product.name}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-navy/30">
