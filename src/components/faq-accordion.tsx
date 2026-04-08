@@ -11,22 +11,22 @@ const FAQ_ITEMS: FaqItem[] = [
   {
     question: "Como recebo o produto?",
     answer:
-      "Apos a compra, voce recebe acesso imediato na area 'Minha Conta'. Basta fazer login com o email usado na compra e clicar em 'Baixar'.",
+      "Após a compra, você recebe acesso imediato na área 'Minha Conta'. Basta fazer login com o email usado na compra e clicar em 'Baixar'.",
   },
   {
     question: "Posso pedir reembolso?",
     answer:
-      "Sim. Voce tem 7 dias de garantia incondicional. Se nao gostar, devolvemos 100% do valor.",
+      "Sim. Você tem 7 dias de garantia incondicional. Se não gostar, devolvemos 100% do valor.",
   },
   {
-    question: "Preciso de algum software especifico?",
+    question: "Preciso de algum software específico?",
     answer:
-      "Depende do produto. Planilhas funcionam no Excel ou Google Sheets. Cada produto lista os requisitos na descricao.",
+      "Depende do produto. Planilhas funcionam no Excel ou Google Sheets. Cada produto lista os requisitos na descrição.",
   },
   {
     question: "Como entro em contato?",
     answer:
-      "Envie um email para contato@doislabs.com.br. Respondemos em ate 24 horas uteis.",
+      "Envie um email para contato@doislabs.com.br. Respondemos em até 24 horas úteis.",
   },
 ];
 

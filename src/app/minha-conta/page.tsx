@@ -12,6 +12,7 @@ export default function MinhaContaPage() {
   const [loading, setLoading] = useState(true);
   const [email, setEmail] = useState("");
   const [magicLinkSent, setMagicLinkSent] = useState(false);
+  const [authError, setAuthError] = useState<string | null>(null);
   const [purchases, setPurchases] = useState<Purchase[]>([]);
   const [downloading, setDownloading] = useState<string | null>(null);
 
@@ -44,11 +45,16 @@ export default function MinhaContaPage() {
 
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
+    setAuthError(null);
     const { error } = await supabase.auth.signInWithOtp({
       email,
       options: { emailRedirectTo: `${window.location.origin}/minha-conta` },
     });
-    if (!error) setMagicLinkSent(true);
+    if (!error) {
+      setMagicLinkSent(true);
+    } else {
+      setAuthError("Não foi possível enviar o link. Tente novamente.");
+    }
   }
 
   async function handleLogout() {
@@ -113,6 +119,9 @@ export default function MinhaContaPage() {
             >
               Enviar link de acesso
             </button>
+            {authError && (
+              <p className="text-red-600 text-sm text-center">{authError}</p>
+            )}
           </form>
         )}
       </div>
@@ -138,7 +147,7 @@ export default function MinhaContaPage() {
       <h2 className="text-xl font-bold mb-4">Meus Produtos</h2>
 
       {purchases.length === 0 ? (
-        <p className="text-navy/50 py-8">Voce ainda nao tem compras.</p>
+        <p className="text-navy/50 py-8">Você ainda não tem compras.</p>
       ) : (
         <div className="space-y-4">
           {purchases.map((purchase) => (

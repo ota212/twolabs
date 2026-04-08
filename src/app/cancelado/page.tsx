@@ -16,7 +16,7 @@ export default function CanceladoPage() {
 
       <h1 className="text-3xl font-bold mb-4">Compra cancelada</h1>
       <p className="text-navy/70 mb-8">
-        Sem problemas! Seus dados nao foram cobrados. Quando quiser, estamos aqui.
+        Sem problemas! Seus dados não foram cobrados. Quando quiser, estamos aqui.
       </p>
 
       <Link

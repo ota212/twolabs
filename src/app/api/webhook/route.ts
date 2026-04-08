@@ -39,25 +39,31 @@ export async function POST(request: NextRequest) {
     // Find or create user
     let userId: string;
 
-    const { data: existingUsers } = await supabase.auth.admin.listUsers();
-    const existingUser = existingUsers?.users?.find(
-      (u) => u.email === email
-    );
+    // Try to create the user first (avoids fetching all users on every webhook)
+    const { data: newUser, error: createError } =
+      await supabase.auth.admin.createUser({
+        email,
+        email_confirm: true,
+      });
 
-    if (existingUser) {
-      userId = existingUser.id;
-    } else {
-      const { data: newUser, error: createError } =
-        await supabase.auth.admin.createUser({
+    if (newUser?.user) {
+      userId = newUser.user.id;
+    } else if (createError?.message?.includes("already been registered")) {
+      // User already exists — retrieve their ID via generateLink (works without listing all users)
+      const { data: linkData, error: linkError } =
+        await supabase.auth.admin.generateLink({
+          type: "magiclink",
           email,
-          email_confirm: true,
         });
 
-      if (createError || !newUser.user) {
-        console.error("Error creating user:", createError);
-        return NextResponse.json({ error: "User creation failed" }, { status: 500 });
+      if (linkError || !linkData?.user?.id) {
+        console.error("Error looking up existing user:", linkError);
+        return NextResponse.json({ error: "User lookup failed" }, { status: 500 });
       }
-      userId = newUser.user.id;
+      userId = linkData.user.id;
+    } else {
+      console.error("Error creating user:", createError);
+      return NextResponse.json({ error: "User creation failed" }, { status: 500 });
     }
 
     // Record purchase

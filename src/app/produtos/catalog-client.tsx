@@ -88,8 +88,8 @@ export function CatalogClient({
           className="border border-navy/10 rounded px-4 py-2 bg-white focus:outline-none focus:border-electric-blue ml-auto"
         >
           <option value="recent">Mais recente</option>
-          <option value="price_asc">Menor preco</option>
-          <option value="price_desc">Maior preco</option>
+          <option value="price_asc">Menor preço</option>
+          <option value="price_desc">Maior preço</option>
         </select>
       </div>
 

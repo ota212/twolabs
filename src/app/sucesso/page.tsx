@@ -16,7 +16,7 @@ export default function SucessoPage() {
 
       <h1 className="text-3xl font-bold mb-4">Compra confirmada!</h1>
       <p className="text-navy/70 mb-8">
-        Seu produto ja esta disponivel. Acesse sua conta para fazer o download.
+        Seu produto já está disponível. Acesse sua conta para fazer o download.
       </p>
 
       <Link

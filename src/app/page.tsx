@@ -29,7 +29,7 @@ export default async function Home() {
           </h1>
           <p className="mt-6 text-lg md:text-xl text-white/70 max-w-2xl">
             Ferramentas prontas para usar. Automatizadas com IA, feitas para quem
-            quer resultados sem complicacao.
+            quer resultados sem complicação.
           </p>
           <Link
             href="/produtos"
@@ -57,8 +57,8 @@ export default async function Home() {
         <div className="max-w-6xl mx-auto px-4 py-16 md:py-24 text-center">
           <h2 className="text-2xl md:text-3xl font-bold mb-4">Dois Labs</h2>
           <p className="text-navy/70 max-w-2xl mx-auto text-lg">
-            Somos Leo e Otavio. Construimos produtos digitais automatizados que
-            resolvem problemas reais — sem enrolacao.
+            Somos Leo e Otávio. Construímos produtos digitais automatizados que
+            resolvem problemas reais — sem enrolação.
           </p>
         </div>
       </section>

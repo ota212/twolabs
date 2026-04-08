@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Sobre",
-  description: "Conheca a Dois Labs — Leo e Otavio construindo produtos digitais automatizados.",
+  description: "Conheça a Dois Labs — Leo e Otávio construindo produtos digitais automatizados.",
 };
 
 export default function SobrePage() {
@@ -12,7 +12,7 @@ export default function SobrePage() {
 
       <p className="text-lg text-navy/70 mb-12">
         A Dois Labs nasceu de uma ideia simples: criar produtos digitais que funcionam
-        sozinhos. Sem complicacao, sem dependencia de terceiros. Ferramentas
+        sozinhos. Sem complicação, sem dependência de terceiros. Ferramentas
         que resolvem problemas reais e geram valor desde o primeiro uso.
       </p>
 
@@ -24,7 +24,7 @@ export default function SobrePage() {
           </div>
           <h3 className="font-bold text-lg">Leo Gaspari</h3>
           <p className="text-navy/60 mt-1">
-            Estrategia, produto e operacoes. Faz as coisas acontecerem.
+            Estratégia, produto e operações. Faz as coisas acontecerem.
           </p>
         </div>
 
@@ -34,15 +34,15 @@ export default function SobrePage() {
           </div>
           <h3 className="font-bold text-lg">Otavio</h3>
           <p className="text-navy/60 mt-1">
-            Tecnologia e automacao. Transforma ideias em sistemas.
+            Tecnologia e automação. Transforma ideias em sistemas.
           </p>
         </div>
       </div>
 
       <h2 className="text-2xl font-bold mb-4">Por que produtos digitais automatizados?</h2>
       <p className="text-navy/70">
-        Porque o mundo ja tem conteudo demais e ferramentas de menos. Nossos produtos
-        sao feitos para resolver um problema especifico, de forma automatizada,
+        Porque o mundo já tem conteúdo demais e ferramentas de menos. Nossos produtos
+        são feitos para resolver um problema específico, de forma automatizada,
         sem precisar de suporte constante. Comprou, usou, resolveu.
       </p>
     </div>
