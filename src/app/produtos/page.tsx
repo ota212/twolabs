@@ -23,12 +23,12 @@ async function getAllProducts(): Promise<Product[]> {
 
 export default async function ProdutosPage() {
   const products = await getAllProducts();
-  const categories = [...new Set(products.map((p) => p.category).filter(Boolean))] as string[];
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-12">
-      <h1 className="text-3xl md:text-4xl font-bold mb-8">Produtos</h1>
-      <CatalogClient products={products} categories={categories} />
+      <h1 className="text-3xl md:text-4xl font-bold mb-2">Produtos</h1>
+      <p className="text-navy/60 mb-10">Explore por área ou use os filtros para encontrar o que precisa.</p>
+      <CatalogClient products={products} />
     </div>
   );
 }

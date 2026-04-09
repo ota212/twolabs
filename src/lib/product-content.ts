@@ -24,6 +24,7 @@ export interface ProductTestimonial {
 export interface ProductContent {
   tagline: string;
   heroImage: string;
+  area: string; // slug da área (ex: "psicologia")
   gallery: { src: string; alt: string }[];
   highlights: ProductHighlight[];
   sections: ProductSection[];
@@ -34,11 +35,29 @@ export interface ProductContent {
   testimonials?: ProductTestimonial[];
 }
 
+// ── Áreas temáticas ────────────────────────────────────────────────────────────
+
+export interface ProductArea {
+  slug: string;
+  name: string;
+  icon: string;
+  description: string;
+  comingSoon?: boolean;
+}
+
+export const PRODUCT_AREAS: ProductArea[] = [
+  { slug: "psicologia", name: "Psicologia", icon: "🧠", description: "Ferramentas para o consultório" },
+  { slug: "financas", name: "Finanças", icon: "💰", description: "Controle e gestão financeira", comingSoon: true },
+  { slug: "marketing", name: "Marketing", icon: "📣", description: "Estratégia e conteúdo", comingSoon: true },
+  { slug: "produtividade", name: "Produtividade", icon: "⚡", description: "Organização e eficiência", comingSoon: true },
+];
+
 export const PRODUCT_CONTENT: Record<string, ProductContent> = {
   "planilha-financeira-psicologos": {
     tagline:
       "Pare de adivinhar quanto você ganhou esse mês. Comece a gerenciar seu consultório como um negócio.",
     heroImage: "/images/planilha/hero.jpg",
+    area: "psicologia",
     gallery: [
       { src: "/images/planilha/sessoes.png", alt: "Aba de Sessões — registro de cada atendimento" },
       { src: "/images/planilha/pacientes.png", alt: "Aba de Pacientes — cadastro e Risco de Churn" },
@@ -140,6 +159,7 @@ export const PRODUCT_CONTENT: Record<string, ProductContent> = {
     tagline:
       "Abra seu consultório com segurança e profissionalismo — desde a primeira sessão.",
     heroImage: "/images/pack/hero.jpg",
+    area: "psicologia",
     gallery: [],
     highlights: [
       {

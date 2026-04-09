@@ -2,9 +2,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { Product } from "@/types";
 import { formatPrice, isNew } from "@/lib/utils";
-import { PRODUCT_CONTENT } from "@/lib/product-content";
+import { PRODUCT_CONTENT, PRODUCT_AREAS } from "@/lib/product-content";
 
 export function ProductCard({ product }: { product: Product }) {
+  const content = PRODUCT_CONTENT[product.slug];
+  const area = content?.area ? PRODUCT_AREAS.find((a) => a.slug === content.area) : null;
   return (
     <Link
       href={`/produtos/${product.slug}`}
@@ -33,11 +35,18 @@ export function ProductCard({ product }: { product: Product }) {
         )}
       </div>
       <div className="p-4">
-        {product.category && (
-          <span className="text-xs uppercase tracking-wider text-navy/50 font-bold">
-            {product.category}
-          </span>
-        )}
+        <div className="flex items-center gap-2 mb-1">
+          {area && (
+            <span className="inline-flex items-center gap-1 text-xs font-bold text-navy/50">
+              <span>{area.icon}</span> {area.name}
+            </span>
+          )}
+          {product.category && (
+            <span className="text-xs uppercase tracking-wider text-navy/35 font-medium">
+              · {product.category}
+            </span>
+          )}
+        </div>
         <h3 className="font-bold mt-1 group-hover:text-electric-blue transition-colors">
           {product.name}
         </h3>
