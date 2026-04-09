@@ -1,10 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
-import { stripe } from "@/lib/stripe";
+import Stripe from "stripe";
 import { createAnonClient } from "@/lib/supabase/server";
 import { Product } from "@/types";
 
 export async function POST(request: NextRequest) {
   try {
+    const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+      apiVersion: "2026-03-25.dahlia",
+      maxNetworkRetries: 1,
+    });
     const { productId } = await request.json();
 
     if (!productId) {
