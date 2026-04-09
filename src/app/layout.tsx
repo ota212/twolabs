@@ -12,11 +12,11 @@ const dmSans = DM_Sans({
 
 export const metadata: Metadata = {
   title: {
-    default: "Dois Labs — Produtos Digitais para Psicólogos",
+    default: "Dois Labs — Produtos Digitais",
     template: "%s | Dois Labs",
   },
   description:
-    "Planilhas, documentos e ferramentas digitais para psicólogos gerenciarem seu consultório com mais clareza e profissionalismo.",
+    "Produtos digitais prontos para usar, construídos com automação e IA. Do problema à solução — sem enrolação.",
   icons: {
     icon: "/favicon.svg",
   },
@@ -29,23 +29,23 @@ export const metadata: Metadata = {
     locale: "pt_BR",
     url: "https://doislabs.com.br",
     siteName: "Dois Labs",
-    title: "Dois Labs — Produtos Digitais para Psicólogos",
+    title: "Dois Labs — Produtos Digitais",
     description:
-      "Planilhas, documentos e ferramentas digitais para psicólogos gerenciarem seu consultório com mais clareza e profissionalismo.",
+      "Produtos digitais prontos para usar, construídos com automação e IA. Do problema à solução — sem enrolação.",
     images: [
       {
         url: "/images/planilha/hero.jpg",
         width: 1200,
         height: 630,
-        alt: "Dois Labs — Produtos Digitais para Psicólogos",
+        alt: "Dois Labs — Produtos Digitais",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Dois Labs — Produtos Digitais para Psicólogos",
+    title: "Dois Labs — Produtos Digitais",
     description:
-      "Planilhas, documentos e ferramentas digitais para psicólogos gerenciarem seu consultório com mais clareza e profissionalismo.",
+      "Produtos digitais prontos para usar, construídos com automação e IA. Do problema à solução — sem enrolação.",
     images: ["/images/planilha/hero.jpg"],
   },
 };

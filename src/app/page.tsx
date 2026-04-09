@@ -59,10 +59,10 @@ export default async function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <h1 className="text-4xl md:text-5xl font-bold leading-tight">
-                Ferramentas digitais para psicólogos.
+                Produtos digitais que trabalham por você.
               </h1>
               <p className="mt-6 text-lg text-white/80 leading-relaxed">
-                Planilhas financeiras, documentos profissionais e muito mais. Prontos para usar, automatizados, sem complicação.
+                Ferramentas prontas para usar, construídas com automação e IA. Do problema à solução — sem enrolação.
               </p>
               <Link
                 href="/produtos"

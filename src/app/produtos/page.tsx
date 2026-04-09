@@ -7,7 +7,7 @@ export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "Produtos",
-  description: "Planilhas financeiras, documentos profissionais e ferramentas digitais para psicólogos. Baixe e use hoje mesmo.",
+  description: "Todos os produtos digitais da Dois Labs. Prontos para usar, automatizados, com acesso imediato após a compra.",
   alternates: { canonical: "https://doislabs.com.br/produtos" },
 };
 
