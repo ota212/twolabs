@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 
 interface GalleryImage {
   src: string;
@@ -21,10 +22,12 @@ export function ImageGallery({ images }: { images: GalleryImage[] }) {
             onClick={() => setSelectedImage(image)}
             className="flex-none w-[320px] md:w-[400px] aspect-[16/10] rounded-lg overflow-hidden border border-navy/10 hover:border-electric-blue/40 transition-colors snap-start bg-white"
           >
-            <img
+            <Image
               src={image.src}
               alt={image.alt}
-              className="w-full h-full object-cover object-top"
+              fill
+              className="object-cover object-top"
+              sizes="(max-width: 768px) 320px, 400px"
             />
           </button>
         ))}
@@ -43,12 +46,15 @@ export function ImageGallery({ images }: { images: GalleryImage[] }) {
             >
               Fechar ✕
             </button>
-            <img
-              src={selectedImage.src}
-              alt={selectedImage.alt}
-              className="w-full rounded-lg shadow-2xl"
-              onClick={(e) => e.stopPropagation()}
-            />
+            <div className="relative w-full aspect-[16/10]" onClick={(e) => e.stopPropagation()}>
+              <Image
+                src={selectedImage.src}
+                alt={selectedImage.alt}
+                fill
+                className="object-contain rounded-lg shadow-2xl"
+                sizes="100vw"
+              />
+            </div>
             <p className="text-white/60 text-sm text-center mt-3">
               {selectedImage.alt}
             </p>

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Product } from "@/types";
 import { formatPrice, isNew } from "@/lib/utils";
 import { PRODUCT_CONTENT } from "@/lib/product-content";
@@ -11,10 +12,12 @@ export function ProductCard({ product }: { product: Product }) {
     >
       <div className="aspect-[4/3] bg-navy/5 relative overflow-hidden">
         {(product.image_url || PRODUCT_CONTENT[product.slug]?.heroImage) ? (
-          <img
-            src={product.image_url ?? PRODUCT_CONTENT[product.slug]?.heroImage}
+          <Image
+            src={(product.image_url ?? PRODUCT_CONTENT[product.slug]?.heroImage) as string}
             alt={product.name}
-            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+            fill
+            className="object-cover transition-transform duration-300 group-hover:scale-105"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-navy/30">

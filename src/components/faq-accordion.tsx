@@ -7,7 +7,7 @@ interface FaqItem {
   answer: string;
 }
 
-const FAQ_ITEMS: FaqItem[] = [
+const DEFAULT_FAQ: FaqItem[] = [
   {
     question: "Como recebo o produto?",
     answer:
@@ -30,12 +30,16 @@ const FAQ_ITEMS: FaqItem[] = [
   },
 ];
 
-export function FaqAccordion() {
+export function FaqAccordion({ items }: { items?: { q: string; a: string }[] }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const faqItems: FaqItem[] = items
+    ? items.map((i) => ({ question: i.q, answer: i.a }))
+    : DEFAULT_FAQ;
 
   return (
     <div className="space-y-2">
-      {FAQ_ITEMS.map((item, index) => (
+      {faqItems.map((item, index) => (
         <div key={index} className="border border-navy/10 rounded">
           <button
             onClick={() => setOpenIndex(openIndex === index ? null : index)}
@@ -43,7 +47,7 @@ export function FaqAccordion() {
           >
             {item.question}
             <svg
-              className={`w-5 h-5 text-navy/40 transition-transform ${
+              className={`w-5 h-5 text-navy/40 flex-none transition-transform ${
                 openIndex === index ? "rotate-180" : ""
               }`}
               fill="none"
@@ -54,7 +58,7 @@ export function FaqAccordion() {
             </svg>
           </button>
           {openIndex === index && (
-            <div className="px-4 pb-4 text-navy/70">{item.answer}</div>
+            <div className="px-4 pb-4 text-navy/70 leading-relaxed">{item.answer}</div>
           )}
         </div>
       ))}

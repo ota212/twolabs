@@ -14,9 +14,12 @@ export default function SucessoPage() {
         </svg>
       </div>
 
-      <h1 className="text-3xl font-bold mb-4">Compra confirmada!</h1>
-      <p className="text-navy/70 mb-8">
-        Seu produto já está disponível. Acesse sua conta para fazer o download.
+      <h1 className="text-3xl font-bold mb-3">Compra confirmada!</h1>
+      <p className="text-navy/70 mb-2">
+        Seu produto está pronto para download.
+      </p>
+      <p className="text-navy/50 text-sm mb-8">
+        Enviamos um link de acesso para o seu email — clique nele para entrar na sua conta e baixar o arquivo.
       </p>
 
       <Link
@@ -25,6 +28,10 @@ export default function SucessoPage() {
       >
         Acessar Minha Conta
       </Link>
+
+      <p className="mt-6 text-navy/40 text-xs">
+        Não recebeu o email? Verifique a caixa de spam ou acesse Minha Conta e solicite um novo link.
+      </p>
     </div>
   );
 }

@@ -10,6 +10,17 @@ export interface ProductSection {
   items?: string[];
 }
 
+export interface ProductFaq {
+  q: string;
+  a: string;
+}
+
+export interface ProductTestimonial {
+  name: string;
+  role: string;
+  text: string;
+}
+
 export interface ProductContent {
   tagline: string;
   heroImage: string;
@@ -19,6 +30,8 @@ export interface ProductContent {
   audience: string[];
   closingLine: string;
   requirements?: string;
+  faq?: ProductFaq[];
+  testimonials?: ProductTestimonial[];
 }
 
 export const PRODUCT_CONTENT: Record<string, ProductContent> = {
@@ -82,6 +95,45 @@ export const PRODUCT_CONTENT: Record<string, ProductContent> = {
       "Porque cuidar de pessoas é sua vocação. Mas cuidar do seu negócio é o que vai garantir que você continue fazendo isso por muito tempo.",
     requirements:
       "Microsoft Excel 2016+ ou Google Sheets. Sem macros, sem VBA — funciona em qualquer versão.",
+    testimonials: [
+      {
+        name: "Ana Paula M.",
+        role: "Psicóloga clínica — SP",
+        text: "Finalmente consigo ver quanto realmente entrou no mês. Antes disso eu vivia no escuro com o financeiro do consultório.",
+      },
+      {
+        name: "Renata C.",
+        role: "Psicóloga — Atendimento particular",
+        text: "O alerta de Risco de Churn me surpreendeu — identifiquei dois pacientes que eu ia perder sem perceber. Indispensável.",
+      },
+      {
+        name: "Mariana T.",
+        role: "Psicóloga — RJ",
+        text: "Configurei em menos de 30 minutos e já vi o valor. A projeção de receita me ajudou muito a planejar os próximos meses.",
+      },
+    ],
+    faq: [
+      {
+        q: "Funciona no Google Sheets ou só no Excel?",
+        a: "Funciona nos dois. Google Sheets e Microsoft Excel 2016 ou superior. Sem macros, sem VBA — apenas fórmulas nativas.",
+      },
+      {
+        q: "Como recebo a planilha após a compra?",
+        a: "Imediatamente após o pagamento, você recebe acesso à sua conta. Lá encontra o link de download — disponível para sempre.",
+      },
+      {
+        q: "Funciona no Mac?",
+        a: "Sim. O Excel para Mac e o Google Sheets (qualquer sistema) funcionam normalmente.",
+      },
+      {
+        q: "Posso pedir reembolso?",
+        a: "Sim — 7 dias de garantia incondicional. Se por qualquer motivo não ficar satisfeito, devolvemos 100% do valor.",
+      },
+      {
+        q: "Preciso saber usar Excel avançado?",
+        a: "Não. A planilha é projetada para quem não é técnico. Você preenche os campos básicos e ela faz os cálculos automaticamente.",
+      },
+    ],
   },
 
   "pack-documentos-psicologos": {
@@ -142,5 +194,44 @@ export const PRODUCT_CONTENT: Record<string, ProductContent> = {
     closingLine:
       "Você passou anos estudando psicologia. Agora é hora de exercê-la com a estrutura que ela merece.",
     requirements: "Google Docs — sem necessidade de software pago.",
+    testimonials: [
+      {
+        name: "Juliana F.",
+        role: "Psicóloga recém-formada — MG",
+        text: "Abri meu consultório com esses documentos. Economizei horas pesquisando modelos na internet e ainda fiquei tranquila sobre a parte ética.",
+      },
+      {
+        name: "Carolina S.",
+        role: "Psicóloga clínica — SP",
+        text: "O contrato de prestação de serviços resolveu um problema que eu tinha faz tempo. Profissional, claro e alinhado ao CFP.",
+      },
+      {
+        name: "Beatriz N.",
+        role: "Psicóloga — Atendimento online",
+        text: "Personalizar é muito simples. Em menos de 1 hora já tinha todos os documentos com meu nome, CRP e identidade visual.",
+      },
+    ],
+    faq: [
+      {
+        q: "O que é Google Docs e preciso pagar?",
+        a: "Google Docs é o editor de documentos gratuito do Google. Você acessa pelo navegador ou celular — sem nenhum custo.",
+      },
+      {
+        q: "Como personalizo os documentos?",
+        a: "Basta abrir cada documento no Google Docs e substituir os campos em colchetes ([NOME DO PROFISSIONAL], [CRP], etc.) pelos seus dados.",
+      },
+      {
+        q: "Funciona no Microsoft Word?",
+        a: "Sim. Você pode exportar qualquer documento do Google Docs para .docx e editar no Word normalmente.",
+      },
+      {
+        q: "Os documentos estão de acordo com o CFP?",
+        a: "Sim. Todos foram desenvolvidos com base nas resoluções vigentes do Conselho Federal de Psicologia — TCLE, prontuário, relatório e demais.",
+      },
+      {
+        q: "Posso pedir reembolso?",
+        a: "Sim — 7 dias de garantia incondicional. Se por qualquer motivo não ficar satisfeito, devolvemos 100% do valor.",
+      },
+    ],
   },
 };

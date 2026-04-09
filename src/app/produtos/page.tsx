@@ -7,7 +7,8 @@ export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "Produtos",
-  description: "Todos os produtos digitais da Dois Labs.",
+  description: "Planilhas financeiras, documentos profissionais e ferramentas digitais para psicólogos. Baixe e use hoje mesmo.",
+  alternates: { canonical: "https://doislabs.com.br/produtos" },
 };
 
 async function getAllProducts(): Promise<Product[]> {

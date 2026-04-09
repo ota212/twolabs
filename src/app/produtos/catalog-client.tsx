@@ -77,7 +77,7 @@ export function CatalogClient({
                   : "bg-white border border-navy/10 hover:border-navy/30"
               }`}
             >
-              {cat}
+              {cat.charAt(0).toUpperCase() + cat.slice(1)}
             </button>
           ))}
         </div>

@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Sobre",
-  description: "Conheça a Dois Labs — Leo e Otávio construindo produtos digitais automatizados.",
+  description: "Dois Labs cria produtos digitais automatizados para profissionais de saúde. Ferramentas que resolvem problemas reais desde o primeiro uso.",
+  alternates: { canonical: "https://doislabs.com.br/sobre" },
 };
 
 export default function SobrePage() {

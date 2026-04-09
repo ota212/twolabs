@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { createBrowserSupabaseClient } from "@/lib/supabase/client";
 import { Purchase } from "@/types";
 import { formatPrice } from "@/lib/utils";
@@ -13,6 +13,8 @@ export default function MinhaContaPage() {
   const [email, setEmail] = useState("");
   const [magicLinkSent, setMagicLinkSent] = useState(false);
   const [authError, setAuthError] = useState<string | null>(null);
+  const [resendCountdown, setResendCountdown] = useState(0);
+  const countdownRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const [purchases, setPurchases] = useState<Purchase[]>([]);
   const [downloading, setDownloading] = useState<string | null>(null);
 
@@ -52,6 +54,13 @@ export default function MinhaContaPage() {
     });
     if (!error) {
       setMagicLinkSent(true);
+      setResendCountdown(30);
+      countdownRef.current = setInterval(() => {
+        setResendCountdown((c) => {
+          if (c <= 1) { clearInterval(countdownRef.current!); return 0; }
+          return c - 1;
+        });
+      }, 1000);
     } else {
       setAuthError("Não foi possível enviar o link. Tente novamente.");
     }
@@ -97,28 +106,45 @@ export default function MinhaContaPage() {
         </p>
 
         {magicLinkSent ? (
-          <div className="bg-green-50 border border-green-200 rounded p-6 text-center">
+          <div className="bg-green-50 border border-green-200 rounded-lg p-6 text-center">
+            <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+              <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+            </div>
             <p className="font-bold text-green-800 mb-1">Link enviado!</p>
-            <p className="text-green-700 text-sm">
-              Verifique seu email e clique no link para entrar.
+            <p className="text-green-700 text-sm mb-1">
+              Verifique sua caixa de entrada em <strong>{email}</strong>
             </p>
+            <p className="text-green-600 text-xs mb-4">Clique no link do email para entrar — sem senha.</p>
+            <button
+              onClick={(e) => { e.preventDefault(); if (resendCountdown === 0) handleLogin(e as unknown as React.FormEvent); }}
+              disabled={resendCountdown > 0}
+              className="text-sm text-green-700 underline disabled:no-underline disabled:text-green-500"
+            >
+              {resendCountdown > 0 ? `Reenviar em ${resendCountdown}s` : "Reenviar link"}
+            </button>
           </div>
         ) : (
           <form onSubmit={handleLogin} className="space-y-4">
-            <input
-              type="email"
-              placeholder="seu@email.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              className="w-full border border-navy/10 rounded px-4 py-3 bg-white focus:outline-none focus:border-electric-blue transition-colors"
-            />
+            <div>
+              <label className="block text-sm font-medium text-navy/70 mb-1">Email</label>
+              <input
+                type="email"
+                placeholder="seu@email.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="w-full border border-navy/10 rounded px-4 py-3 bg-white focus:outline-none focus:border-electric-blue transition-colors"
+              />
+            </div>
             <button
               type="submit"
               className="w-full bg-electric-blue text-white font-bold py-3 rounded hover:bg-electric-blue/90 transition-colors"
             >
               Enviar link de acesso
             </button>
+            <p className="text-center text-xs text-navy/40">Sem senha — enviamos um link direto para seu email.</p>
             {authError && (
               <p className="text-red-600 text-sm text-center">{authError}</p>
             )}

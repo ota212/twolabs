@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Image from "next/image";
 import ReactMarkdown from "react-markdown";
 import { createAnonClient } from "@/lib/supabase/server";
 import { Product } from "@/types";
@@ -8,6 +9,10 @@ import { BuyButton } from "@/components/buy-button";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { ImageGallery } from "@/components/image-gallery";
 import { HighlightCard } from "@/components/highlight-card";
+import { JsonLd } from "@/components/json-ld";
+import { Breadcrumb } from "@/components/breadcrumb";
+import { TestimonialCard } from "@/components/testimonial-card";
+import { FadeIn } from "@/components/fade-in";
 import { PRODUCT_CONTENT } from "@/lib/product-content";
 
 export const revalidate = 60;
@@ -32,9 +37,24 @@ export async function generateMetadata({
   const product = await getProduct(slug);
   if (!product) return { title: "Produto não encontrado" };
   const content = PRODUCT_CONTENT[slug];
+  const description = content?.tagline ?? product.description?.slice(0, 160) ?? undefined;
+  const image = content?.heroImage ?? null;
   return {
     title: product.name,
-    description: content?.tagline ?? product.description?.slice(0, 160) ?? undefined,
+    description,
+    alternates: { canonical: `https://doislabs.com.br/produtos/${slug}` },
+    openGraph: {
+      title: product.name,
+      description: description ?? undefined,
+      url: `https://doislabs.com.br/produtos/${slug}`,
+      ...(image && { images: [{ url: image, width: 1200, height: 630, alt: product.name }] }),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: product.name,
+      description: description ?? undefined,
+      ...(image && { images: [image] }),
+    },
   };
 }
 
@@ -57,11 +77,35 @@ export default async function ProductPage({
     return <FallbackLayout product={product} />;
   }
 
+  const priceInBRL = (product.price_cents / 100).toFixed(2);
+
   return (
     <>
+      <JsonLd schema={{
+        "@context": "https://schema.org",
+        "@type": "Product",
+        name: product.name,
+        description: content?.tagline ?? product.description ?? undefined,
+        image: content?.heroImage ? `https://doislabs.com.br${content.heroImage}` : undefined,
+        url: `https://doislabs.com.br/produtos/${slug}`,
+        brand: { "@type": "Brand", name: "Dois Labs" },
+        offers: {
+          "@type": "Offer",
+          price: priceInBRL,
+          priceCurrency: "BRL",
+          availability: "https://schema.org/InStock",
+          seller: { "@type": "Organization", name: "Dois Labs" },
+        },
+      }} />
+
       {/* ─── Hero ─── */}
       <section className="bg-navy text-white">
         <div className="max-w-6xl mx-auto px-4 py-16 md:py-24">
+          <Breadcrumb items={[
+            { label: "Home", href: "/" },
+            { label: "Produtos", href: "/produtos" },
+            { label: product.name },
+          ]} />
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               {product.category && (
@@ -72,7 +116,7 @@ export default async function ProductPage({
               <h1 className="text-3xl md:text-5xl font-bold leading-tight">
                 {product.name}
               </h1>
-              <p className="mt-4 text-lg text-white/70 leading-relaxed">
+              <p className="mt-4 text-lg text-white/80 leading-relaxed">
                 {content.tagline}
               </p>
               <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-4">
@@ -94,11 +138,16 @@ export default async function ProductPage({
             {/* Hero image */}
             <div className="hidden lg:block">
               {content.heroImage ? (
-                <img
-                  src={content.heroImage}
-                  alt={product.name}
-                  className="w-full rounded-lg shadow-2xl"
-                />
+                <div className="relative w-full aspect-[4/3]">
+                  <Image
+                    src={content.heroImage}
+                    alt={product.name}
+                    fill
+                    className="object-cover rounded-lg shadow-2xl"
+                    sizes="(max-width: 1024px) 0px, 50vw"
+                    priority
+                  />
+                </div>
               ) : (
                 <div className="aspect-[4/3] bg-white/5 rounded-lg flex items-center justify-center">
                   <svg className="w-24 h-24 text-white/10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -126,7 +175,9 @@ export default async function ProductPage({
         <div className="max-w-6xl mx-auto px-4 py-16">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {content.highlights.map((h, i) => (
-              <HighlightCard key={i} icon={h.icon} title={h.title} description={h.description} />
+              <FadeIn key={i} delay={i * 80}>
+                <HighlightCard icon={h.icon} title={h.title} description={h.description} />
+              </FadeIn>
             ))}
           </div>
         </div>
@@ -190,6 +241,22 @@ export default async function ProductPage({
         </section>
       )}
 
+      {/* ─── Testimonials ─── */}
+      {content.testimonials && content.testimonials.length > 0 && (
+        <section className="bg-cream">
+          <div className="max-w-6xl mx-auto px-4 py-16">
+            <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">O que dizem quem usa</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {content.testimonials.map((t, i) => (
+                <FadeIn key={i} delay={i * 100}>
+                  <TestimonialCard name={t.name} role={t.role} text={t.text} />
+                </FadeIn>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* ─── CTA Final ─── */}
       <section className="bg-navy text-white">
         <div className="max-w-xl mx-auto px-4 py-16 text-center">
@@ -209,7 +276,7 @@ export default async function ProductPage({
       <section className="bg-cream">
         <div className="max-w-3xl mx-auto px-4 py-16">
           <h2 className="text-2xl font-bold mb-6">Perguntas Frequentes</h2>
-          <FaqAccordion />
+          <FaqAccordion items={content.faq} />
         </div>
       </section>
     </>
@@ -223,7 +290,7 @@ function FallbackLayout({ product }: { product: Product }) {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
         <div className="aspect-[4/3] bg-navy/5 rounded-lg overflow-hidden">
           {product.image_url ? (
-            <img src={product.image_url} alt={product.name} className="w-full h-full object-cover" />
+            <Image src={product.image_url} alt={product.name} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
           ) : (
             <div className="w-full h-full flex items-center justify-center text-navy/20">
               <svg className="w-24 h-24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
