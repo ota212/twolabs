@@ -69,7 +69,7 @@ export default function MinhaContaPage() {
   async function handleGoogleAuth() {
     await supabase.auth.signInWithOAuth({
       provider: "google",
-      options: { redirectTo: `${window.location.origin}/minha-conta` },
+      options: { redirectTo: `${window.location.origin}/auth/callback` },
     });
   }
 
