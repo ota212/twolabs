@@ -1,3 +1,4 @@
+import { redirect } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { createAnonClient } from "@/lib/supabase/server";
@@ -22,7 +23,14 @@ async function getFeaturedProducts(): Promise<Product[]> {
   return (data as Product[]) ?? [];
 }
 
-export default async function Home() {
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: Promise<{ code?: string }>;
+}) {
+  const { code } = await searchParams;
+  if (code) redirect(`/auth/callback?code=${code}`);
+
   const products = await getFeaturedProducts();
 
   return (
