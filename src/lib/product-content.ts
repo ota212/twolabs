@@ -47,12 +47,114 @@ export interface ProductArea {
 
 export const PRODUCT_AREAS: ProductArea[] = [
   { slug: "psicologia", name: "Psicologia", icon: "🧠", description: "Ferramentas para o consultório" },
-  { slug: "financas", name: "Finanças", icon: "💰", description: "Controle e gestão financeira", comingSoon: true },
+  { slug: "financas", name: "Finanças", icon: "💰", description: "Controle e gestão financeira" },
   { slug: "marketing", name: "Marketing", icon: "📣", description: "Estratégia e conteúdo", comingSoon: true },
   { slug: "produtividade", name: "Produtividade", icon: "⚡", description: "Organização e eficiência", comingSoon: true },
 ];
 
 export const PRODUCT_CONTENT: Record<string, ProductContent> = {
+  "planilha-financeira-pessoal": {
+    tagline:
+      "Controle seu dinheiro sem complicação. Uma planilha pronta para usar — do salário ao orçamento, tudo automático.",
+    heroImage: "/images/financeira-pessoal/hero.jpg",
+    area: "financas",
+    gallery: [
+      { src: "/images/financeira-pessoal/dashboard.png", alt: "Dashboard — visão geral do mês" },
+      { src: "/images/financeira-pessoal/receitas.png", alt: "Aba de Receitas — registro de entradas" },
+      { src: "/images/financeira-pessoal/despesas.png", alt: "Aba de Despesas — controle de gastos por categoria" },
+      { src: "/images/financeira-pessoal/cartao.png", alt: "Aba de Cartão de Crédito — faturas e parcelas" },
+    ],
+    highlights: [
+      {
+        icon: "chart",
+        title: "Dashboard automático",
+        description:
+          "Receitas, despesas, saldo do mês e evolução ao longo do ano — tudo calculado em tempo real.",
+      },
+      {
+        icon: "trending",
+        title: "Orçamento inteligente",
+        description:
+          "Defina metas por categoria e acompanhe quanto já gastou — sem surpresa no fim do mês.",
+      },
+      {
+        icon: "file",
+        title: "Cartão de crédito sob controle",
+        description:
+          "Registre compras parceladas e veja a fatura do mês antes que ela chegue.",
+      },
+      {
+        icon: "zap",
+        title: "Sem macros, sem VBA",
+        description:
+          "Funciona no Excel 2016+ e Google Sheets. Apenas fórmulas nativas — nada para quebrar.",
+      },
+    ],
+    sections: [
+      {
+        title: "O que está incluído",
+        content:
+          "7 abas que trabalham juntas de forma automática. Você preenche o básico e a planilha faz o resto.",
+        items: [
+          "**Dashboard** — visão completa do mês: receitas, despesas, saldo, gráficos e comparativos",
+          "**Receitas** — registre salário, freelas, rendimentos e qualquer outra entrada",
+          "**Despesas** — controle de gastos por categoria com totais automáticos",
+          "**Cartão de Crédito** — compras parceladas, fatura do mês e próximas faturas",
+          "**Orçamento** — metas mensais por categoria e acompanhamento de quanto já foi gasto",
+          "**Metas** — objetivos financeiros de curto, médio e longo prazo com progresso",
+          "**Guia de Uso** — instruções passo a passo para começar em minutos",
+        ],
+      },
+      {
+        title: "Como ela funciona",
+        content:
+          "A planilha vem com dados de exemplo (salário de R$4.500/mês e 52 lançamentos de despesas de Jan a Jun/2025) para você ver tudo funcionando. Depois é só apagar e colocar os seus.",
+        items: [
+          "**Design limpo e profissional** — verde escuro #1A4D2E e tipografia Arial em hierarquia clara",
+          "**Células de entrada destacadas** — azul claro #E8F4FD indica exatamente onde você preenche",
+          "**Fórmulas prontas** — totais, médias, saldos e gráficos atualizam sozinhos",
+          "**Feito com openpyxl** — sem macros, sem VBA, compatível com qualquer versão moderna",
+        ],
+      },
+    ],
+    audience: [
+      "Quem quer começar a controlar o dinheiro e não sabe por onde",
+      "Quem tentou usar apps de finanças mas acabou abandonando",
+      "Quem quer ter clareza sobre para onde o salário está indo todo mês",
+      "Quem precisa organizar as faturas de cartão antes que elas escapem do controle",
+    ],
+    closingLine:
+      "Controlar o dinheiro não precisa ser difícil. Precisa só de uma ferramenta que funciona.",
+    requirements:
+      "Microsoft Excel 2016+ ou Google Sheets. Sem macros, sem VBA — funciona em qualquer versão moderna.",
+    faq: [
+      {
+        q: "Funciona no Google Sheets ou só no Excel?",
+        a: "Funciona nos dois. Google Sheets e Microsoft Excel 2016 ou superior. Sem macros, sem VBA — apenas fórmulas nativas.",
+      },
+      {
+        q: "Como recebo a planilha após a compra?",
+        a: "Imediatamente após o pagamento, você recebe acesso à sua conta. Lá encontra o link de download — disponível para sempre.",
+      },
+      {
+        q: "Funciona no Mac?",
+        a: "Sim. O Excel para Mac e o Google Sheets (qualquer sistema) funcionam normalmente.",
+      },
+      {
+        q: "Preciso saber usar Excel avançado?",
+        a: "Não. A planilha já vem pronta com dados de exemplo. Você só precisa substituir pelos seus valores — todas as fórmulas já estão configuradas.",
+      },
+      {
+        q: "Já vem com dados dentro?",
+        a: "Sim. Ela vem com um exemplo completo (salário de R$4.500/mês e 52 lançamentos de despesas) para você ver tudo funcionando. Depois é só apagar e usar com os seus dados.",
+      },
+      {
+        q: "Posso pedir reembolso?",
+        a: "Sim — 7 dias de garantia incondicional. Se por qualquer motivo não ficar satisfeito, devolvemos 100% do valor.",
+      },
+    ],
+  },
+
   "planilha-financeira-psicologos": {
     tagline:
       "Pare de adivinhar quanto você ganhou esse mês. Comece a gerenciar seu consultório como um negócio.",
