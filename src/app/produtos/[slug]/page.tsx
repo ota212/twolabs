@@ -15,7 +15,7 @@ import { TestimonialCard } from "@/components/testimonial-card";
 import { FadeIn } from "@/components/fade-in";
 import { PRODUCT_CONTENT } from "@/lib/product-content";
 
-export const revalidate = 60;
+export const dynamic = "force-dynamic";
 
 async function getProduct(slug: string): Promise<Product | null> {
   const supabase = createAnonClient();
