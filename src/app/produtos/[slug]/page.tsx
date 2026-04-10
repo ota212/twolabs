@@ -72,6 +72,9 @@ export default async function ProductPage({
 
   const content = PRODUCT_CONTENT[slug];
 
+  // DEBUG: log para diagnóstico (remover depois)
+  console.log("[ProductPage] slug:", slug, "| content keys:", Object.keys(PRODUCT_CONTENT).join(", "), "| found:", !!content);
+
   // Fallback: se não tem conteúdo estruturado, renderiza layout simples
   if (!content) {
     return <FallbackLayout product={product} />;
