@@ -53,6 +53,110 @@ export const PRODUCT_AREAS: ProductArea[] = [
 ];
 
 export const PRODUCT_CONTENT: Record<string, ProductContent> = {
+  "planilha-mei": {
+    tagline:
+      "Chega de misturar conta pessoal com empresarial. Controle seu MEI sem complicação — do faturamento ao DAS, tudo automático.",
+    heroImage: "/images/mei/hero.jpg",
+    area: "financas",
+    gallery: [
+      { src: "/images/mei/painel.png", alt: "Painel do Negócio — KPIs, semáforo MEI e próximas contas" },
+      { src: "/images/mei/faturamento.png", alt: "Faturamento — receitas e % do limite anual" },
+      { src: "/images/mei/despesas.png", alt: "Despesas do Negócio — gastos por categoria" },
+      { src: "/images/mei/das.png", alt: "Controle do DAS — status mensal Pago/Pendente/Vencido" },
+    ],
+    highlights: [
+      {
+        icon: "alert",
+        title: "Semáforo do limite MEI",
+        description:
+          "Verde, amarelo ou vermelho — saiba exatamente o quanto já faturou e quando está perto dos R$130.000.",
+      },
+      {
+        icon: "file",
+        title: "DAS nunca mais atrasado",
+        description:
+          "Controle mensal com status Pago, Pendente ou VENCIDO. Alerta automático de vencimento todo mês.",
+      },
+      {
+        icon: "chart",
+        title: "Declaração anual sem susto",
+        description:
+          "A aba DASN-SIMEI gera automaticamente o relatório que você precisa para declarar o imposto anual.",
+      },
+      {
+        icon: "zap",
+        title: "Sem macros, sem VBA",
+        description:
+          "Funciona no Excel 2016+ e Google Sheets. Apenas fórmulas nativas — nada para quebrar.",
+      },
+    ],
+    sections: [
+      {
+        title: "O que está incluído",
+        content:
+          "9 abas integradas que cobrem tudo que um MEI precisa para ter o negócio sob controle — do primeiro real faturado até a declaração anual.",
+        items: [
+          "**Painel do Negócio** — dashboard com faturamento do mês, acumulado no ano, total de gastos, semáforo do limite MEI e próximas contas a vencer",
+          "**Faturamento** — registro de todas as receitas com totalizador mensal e percentual do limite anual consumido",
+          "**Despesas** — gastos do negócio por categoria (equipamentos, marketing, impostos, etc.) com gráfico automático",
+          "**Controle do DAS** — status de cada parcela mensal (Pago, Pendente ou VENCIDO) com cálculo por categoria MEI",
+          "**Contas a Pagar** — alertas automáticos de vencimento para você nunca mais ser pego de surpresa",
+          "**Notas Fiscais** — registro das NFs emitidas para controle e histórico",
+          "**DASN-SIMEI** — relatório automático com os dados necessários para a declaração anual do MEI",
+          "**Configurações** — setup inicial com nome da empresa, CNPJ e categoria MEI",
+          "**Guia do MEI** — instruções em linguagem acessível para configurar e usar a planilha do zero",
+        ],
+      },
+      {
+        title: "Para quem foi feita",
+        content:
+          "A planilha foi construída para o MEI real — não para o MEI que tem contador, mas para quem gerencia tudo sozinho e precisa de clareza sem complexidade.",
+        items: [
+          "**MEI que não sabe o quanto faturou** — o semáforo mostra em tempo real se você está longe, perto ou no limite dos R$130.000",
+          "**MEI que paga DAS com atraso** — o controle mensal mostra o status de cada parcela e avisa quando está vencendo",
+          "**MEI que mistura pessoal com empresarial** — a aba de despesas é exclusiva para gastos do negócio, zero confusão",
+          "**MEI que teme a declaração anual** — a aba DASN-SIMEI organiza os dados automaticamente para você não ter susto em janeiro",
+        ],
+      },
+    ],
+    audience: [
+      "MEIs que não sabem se estão perto do limite de faturamento anual de R$130.000",
+      "Quem esquece de pagar o DAS ou paga com atraso todo mês",
+      "Quem mistura conta pessoal com empresarial e não sabe o lucro real do negócio",
+      "Quem sofre na hora de fazer a declaração anual DASN-SIMEI",
+    ],
+    closingLine:
+      "Você abriu um MEI para ter mais liberdade. Controlar as finanças é o que garante que essa liberdade dure.",
+    requirements:
+      "Microsoft Excel 2016+ ou Google Sheets. Sem macros, sem VBA — funciona em qualquer versão moderna.",
+    faq: [
+      {
+        q: "Funciona no Google Sheets ou só no Excel?",
+        a: "Funciona nos dois. Google Sheets e Microsoft Excel 2016 ou superior. Sem macros, sem VBA — apenas fórmulas nativas.",
+      },
+      {
+        q: "Funciona para qualquer categoria de MEI?",
+        a: "Sim. Na aba Configurações você seleciona sua categoria (Comércio, Serviços ou Indústria) e a planilha ajusta o cálculo do DAS automaticamente.",
+      },
+      {
+        q: "O que é a DASN-SIMEI e por que preciso dela?",
+        a: "É a Declaração Anual do Simples Nacional para MEI — obrigatória todo ano até 31 de maio. A planilha organiza automaticamente os dados que você precisa informar.",
+      },
+      {
+        q: "Preciso de contador para usar?",
+        a: "Não. A planilha foi feita para quem não tem formação financeira. Você preenche os campos simples e ela faz os cálculos.",
+      },
+      {
+        q: "Como recebo a planilha após a compra?",
+        a: "Imediatamente após o pagamento, você recebe acesso à sua conta. Lá encontra o link de download — disponível para sempre.",
+      },
+      {
+        q: "Posso pedir reembolso?",
+        a: "Sim — 7 dias de garantia incondicional. Se por qualquer motivo não ficar satisfeito, devolvemos 100% do valor.",
+      },
+    ],
+  },
+
   "planilha-financeira-pessoal": {
     tagline:
       "Controle seu dinheiro sem complicação. Uma planilha pronta para usar — do salário ao orçamento, tudo automático.",
