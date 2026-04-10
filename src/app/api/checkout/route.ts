@@ -28,6 +28,7 @@ export async function POST(request: NextRequest) {
     // Use native fetch instead of Stripe SDK to avoid connection issues in serverless
     const params = new URLSearchParams({
       mode: "payment",
+      "payment_method_types[0]": "card",
       "line_items[0][price_data][currency]": "brl",
       "line_items[0][price_data][product_data][name]": typedProduct.name,
       "line_items[0][price_data][unit_amount]": String(typedProduct.price_cents),
@@ -48,7 +49,9 @@ export async function POST(request: NextRequest) {
 
     if (!res.ok) {
       const err = await res.json();
-      throw new Error(err.error?.message ?? "Stripe error");
+      const stripeMsg = err.error?.message ?? "Stripe error";
+      console.error("Stripe API error:", JSON.stringify(err));
+      return NextResponse.json({ error: stripeMsg }, { status: 500 });
     }
 
     const session = await res.json();

@@ -19,7 +19,8 @@ export default function SucessoPage() {
         Seu produto está pronto para download.
       </p>
       <p className="text-navy/50 text-sm mb-8">
-        Enviamos um link de acesso para o seu email — clique nele para entrar na sua conta e baixar o arquivo.
+        Acesse <strong className="text-navy/70">Minha Conta</strong> com o mesmo email usado na compra.
+        Você receberá um link de acesso direto — sem precisar criar senha.
       </p>
 
       <Link
@@ -30,7 +31,7 @@ export default function SucessoPage() {
       </Link>
 
       <p className="mt-6 text-navy/40 text-xs">
-        Não recebeu o email? Verifique a caixa de spam ou acesse Minha Conta e solicite um novo link.
+        Use o mesmo email informado no momento da compra.
       </p>
     </div>
   );

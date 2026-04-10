@@ -20,7 +20,7 @@ export function ImageGallery({ images }: { images: GalleryImage[] }) {
           <button
             key={i}
             onClick={() => setSelectedImage(image)}
-            className="flex-none w-[320px] md:w-[400px] aspect-[16/10] rounded-lg overflow-hidden border border-navy/10 hover:border-electric-blue/40 transition-colors snap-start bg-white"
+            className="relative flex-none w-[320px] md:w-[400px] aspect-[16/10] rounded-lg overflow-hidden border border-navy/10 hover:border-electric-blue/40 transition-colors snap-start bg-white"
           >
             <Image
               src={image.src}

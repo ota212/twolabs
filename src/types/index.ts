@@ -20,3 +20,23 @@ export interface Purchase {
   created_at: string;
   product?: Product;
 }
+
+// ── Admin types ────────────────────────────────────────────────────────────────
+
+export interface AdminMetrics {
+  revenue: { today: number; week: number; month: number; total: number };
+  purchases: { today: number; week: number; month: number; total: number };
+  userCount: number;
+  revenueByProduct: { name: string; revenue: number }[];
+  dailyRevenue: { date: string; revenue: number }[];
+  recentPurchases: RecentPurchase[];
+}
+
+export interface RecentPurchase {
+  id: string;
+  userEmail: string;
+  productName: string;
+  priceCents: number;
+  status: string;
+  createdAt: string;
+}
