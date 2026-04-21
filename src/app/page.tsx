@@ -3,7 +3,9 @@ import Link from "next/link";
 import { createAnonClient } from "@/lib/supabase/server";
 import { ProductCard } from "@/components/product-card";
 import { JsonLd } from "@/components/json-ld";
-import { Marquee } from "@/components/marquee";
+import { TrustStrip } from "@/components/trust-strip";
+import { TrustBar } from "@/components/trust-bar";
+import { GuaranteeBadge } from "@/components/guarantee-badge";
 import { MonoLabel } from "@/components/mono-label";
 import { EditorialHeading, Italic } from "@/components/editorial-heading";
 import { Reveal } from "@/components/reveal";
@@ -136,14 +138,14 @@ export default async function Home({
       />
 
       {/* ─── HERO ─── */}
-      <section className="relative min-h-screen flex flex-col justify-center overflow-hidden pt-[180px] pb-20 px-10">
+      <section className="relative min-h-[75vh] flex flex-col justify-center overflow-hidden pt-[160px] pb-14 px-10">
         <div className="max-w-[1400px] mx-auto w-full">
-          <Reveal className="flex items-center gap-4 mb-10 flex-wrap">
+          <Reveal className="flex items-center gap-4 mb-8 flex-wrap">
             <span className="inline-flex items-center gap-2 px-3.5 py-2 border border-navy rounded-full text-xs tracking-[0.1em] uppercase">
               <span className="w-[7px] h-[7px] rounded-full bg-electric-blue animate-blink" />
               Produtos disponíveis
             </span>
-            <MonoLabel>[ 01 / marketplace de produtos digitais ]</MonoLabel>
+            <MonoLabel>[ 01 / catálogo de produtos digitais ]</MonoLabel>
           </Reveal>
 
           <Reveal delay={1}>
@@ -156,52 +158,36 @@ export default async function Home({
             </EditorialHeading>
           </Reveal>
 
-          <div className="mt-16 flex flex-wrap gap-12 items-end">
+          <div className="mt-10 flex flex-wrap gap-10 items-end">
             <Reveal delay={2}>
-              <p className="text-xl leading-relaxed text-muted max-w-[480px]">
+              <p className="text-xl leading-relaxed text-navy/75 max-w-[480px]">
                 Planilhas, templates e ferramentas prontas pra resolver
                 problemas reais. Comprou, baixou, usou — sem enrolação.
               </p>
             </Reveal>
 
-            <Reveal delay={3} className="flex flex-col gap-3">
+            <Reveal delay={3} className="flex flex-wrap items-center gap-4">
               <Link
                 href="/produtos"
-                className="group inline-flex items-center gap-4 px-8 py-5 bg-navy text-cream rounded-full text-base tracking-[-0.01em] transition-transform duration-200 hover:-translate-y-0.5"
+                className="group inline-flex items-center gap-4 px-8 py-5 bg-navy text-cream rounded-full text-base tracking-[-0.01em] transition-transform duration-200 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-electric-blue"
               >
                 Ver todos os produtos
                 <span className="w-[34px] h-[34px] rounded-full bg-electric-blue grid place-items-center text-white text-sm">
                   →
                 </span>
               </Link>
-              <span className="font-mono text-[11px] text-muted pl-2">
-                Pagamento único · Acesso imediato · Garantia de 7 dias.
-              </span>
+              <GuaranteeBadge variant="dark" />
             </Reveal>
           </div>
+
+          <Reveal delay={3} className="mt-12 pt-8 border-t border-navy/10">
+            <TrustBar variant="dark" />
+          </Reveal>
         </div>
       </section>
 
-      {/* ─── TICKER ─── */}
-      <section className="bg-navy text-cream border-y border-navy">
-        <div
-          className="py-7 font-serif italic"
-          style={{ fontSize: "clamp(28px, 4vw, 56px)", letterSpacing: "-0.02em" }}
-        >
-          <Marquee speed={45}>
-            <span>Comprar</span>
-            <span className="text-electric-blue mx-8">·</span>
-            <span>Baixar</span>
-            <span className="text-electric-blue mx-8">·</span>
-            <span>Usar</span>
-            <span className="text-electric-blue mx-8">·</span>
-            <span>Automatizar</span>
-            <span className="text-electric-blue mx-8">·</span>
-            <span>Resolver</span>
-            <span className="text-electric-blue mx-8">·</span>
-          </Marquee>
-        </div>
-      </section>
+      {/* ─── TRUST STRIP (replaces decorative marquee) ─── */}
+      <TrustStrip />
 
       {/* ─── INTRO ─── */}
       <section className="px-10 py-24 md:py-32 border-b border-navy/10">
@@ -367,15 +353,16 @@ export default async function Home({
               te entrega ele.
             </EditorialHeading>
           </Reveal>
-          <Reveal delay={2} className="mt-20 flex flex-wrap items-center gap-10">
+          <Reveal delay={2} className="mt-20 flex flex-wrap items-center gap-6">
             <Link
               href="/produtos"
-              className="inline-flex items-center gap-4 px-9 py-6 bg-electric-blue text-white rounded-full text-lg hover:brightness-110 transition-all"
+              className="inline-flex items-center gap-4 px-9 py-6 bg-electric-blue text-white rounded-full text-lg hover:brightness-110 transition-all focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cream"
             >
               Ver todos os produtos
               <span className="text-xl">→</span>
             </Link>
-            <div>
+            <GuaranteeBadge variant="light" />
+            <div className="ml-0 md:ml-4">
               <div className="text-sm text-cream/60">Dúvidas antes de comprar?</div>
               <a
                 href="mailto:contato@doislabs.com.br"
