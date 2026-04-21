@@ -3,27 +3,22 @@
 import { useState, useMemo } from "react";
 import { Product } from "@/types";
 import { ProductCard } from "@/components/product-card";
+import { MonoLabel } from "@/components/mono-label";
 import { PRODUCT_CONTENT, PRODUCT_AREAS, type ProductArea } from "@/lib/product-content";
 
 type SortOption = "recent" | "price_asc" | "price_desc";
 
-export function CatalogClient({
-  products,
-}: {
-  products: Product[];
-}) {
+export function CatalogClient({ products }: { products: Product[] }) {
   const [search, setSearch] = useState("");
   const [selectedArea, setSelectedArea] = useState<string | null>(null);
   const [selectedType, setSelectedType] = useState<string | null>(null);
   const [sort, setSort] = useState<SortOption>("recent");
 
-  // Tipos de produto derivados dos produtos reais (planilhas, documentos, etc.)
   const productTypes = useMemo(() => {
     const types = [...new Set(products.map((p) => p.category).filter(Boolean))] as string[];
     return types.sort();
   }, [products]);
 
-  // Áreas que têm produtos reais
   const activeAreaSlugs = useMemo(() => {
     const slugs = new Set<string>();
     products.forEach((p) => {
@@ -74,10 +69,10 @@ export function CatalogClient({
 
   return (
     <>
-      {/* ─── Áreas temáticas ─── */}
-      <div className="mb-10">
-        <h2 className="text-lg font-bold text-navy/70 mb-4">Áreas</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+      {/* ─── Áreas ─── */}
+      <div className="mb-16">
+        <MonoLabel className="mb-6 block">[ áreas ]</MonoLabel>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-navy/10 border border-navy/10">
           {PRODUCT_AREAS.map((area) => {
             const isActive = selectedArea === area.slug;
             const hasProducts = activeAreaSlugs.has(area.slug);
@@ -88,62 +83,66 @@ export function CatalogClient({
                 key={area.slug}
                 onClick={() => handleAreaClick(area)}
                 disabled={isComingSoon}
-                className={`relative flex flex-col items-center text-center p-4 rounded-xl border transition-all ${
+                className={`relative text-left p-6 transition-colors ${
                   isActive
-                    ? "bg-navy text-white border-navy shadow-lg scale-[1.02]"
+                    ? "bg-navy text-cream"
                     : isComingSoon
-                    ? "bg-navy/[0.02] border-navy/5 text-navy/30 cursor-not-allowed"
-                    : "bg-white border-navy/10 hover:border-navy/30 hover:shadow-md text-navy"
+                    ? "bg-cream-2 text-navy/25 cursor-not-allowed"
+                    : "bg-cream hover:bg-cream-2 text-navy"
                 }`}
               >
-                <span className="text-2xl mb-1.5">{area.icon}</span>
-                <span className="font-bold text-sm">{area.name}</span>
-                <span className={`text-xs mt-0.5 ${isActive ? "text-white/70" : isComingSoon ? "text-navy/20" : "text-navy/50"}`}>
-                  {area.description}
+                <span className="block text-2xl mb-3">{area.icon}</span>
+                <span
+                  className="block font-serif italic leading-tight"
+                  style={{ fontSize: "clamp(20px, 1.6vw, 26px)", letterSpacing: "-0.01em" }}
+                >
+                  {area.name}
                 </span>
-                {isComingSoon && (
-                  <span className="absolute top-2 right-2 text-[10px] font-bold uppercase tracking-wider text-navy/25">
-                    Em breve
-                  </span>
-                )}
+                <span
+                  className={`block mt-2 text-xs font-mono tracking-wider uppercase ${
+                    isActive ? "text-cream/60" : isComingSoon ? "text-navy/20" : "text-muted"
+                  }`}
+                >
+                  {isComingSoon ? "em breve" : area.description}
+                </span>
               </button>
             );
           })}
         </div>
       </div>
 
-      {/* ─── Filtros e busca ─── */}
-      <div className="flex flex-col md:flex-row gap-4 mb-8">
+      {/* ─── Busca + filtros ─── */}
+      <div className="flex flex-col md:flex-row gap-4 mb-8 items-stretch md:items-center">
         <input
           type="text"
           placeholder="Buscar produto..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="border border-navy/10 rounded px-4 py-2 bg-white focus:outline-none focus:border-electric-blue transition-colors md:w-64"
+          className="border-b border-navy/20 bg-transparent px-0 py-3 text-lg focus:outline-none focus:border-navy transition-colors md:w-72 placeholder:text-navy/30"
         />
 
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2 md:ml-4">
           <button
             onClick={() => setSelectedType(null)}
-            className={`px-4 py-2 rounded text-sm font-bold transition-colors ${
+            className={`px-4 py-2 rounded-full text-xs font-mono tracking-wider uppercase transition-colors ${
               selectedType === null
-                ? "bg-navy text-white"
-                : "bg-white border border-navy/10 hover:border-navy/30"
+                ? "bg-navy text-cream"
+                : "border border-navy/20 hover:border-navy text-navy"
             }`}
           >
-            Todos os tipos
+            Todos
           </button>
           {productTypes.map((type) => (
             <button
               key={type}
               onClick={() => setSelectedType(selectedType === type ? null : type)}
-              className={`px-4 py-2 rounded text-sm font-bold transition-colors ${
+              className={`px-4 py-2 rounded-full text-xs font-mono tracking-wider uppercase transition-colors ${
                 selectedType === type
-                  ? "bg-navy text-white"
-                  : "bg-white border border-navy/10 hover:border-navy/30"
+                  ? "bg-navy text-cream"
+                  : "border border-navy/20 hover:border-navy text-navy"
               }`}
             >
-              {type.charAt(0).toUpperCase() + type.slice(1)}
+              {type}
             </button>
           ))}
         </div>
@@ -151,7 +150,7 @@ export function CatalogClient({
         <select
           value={sort}
           onChange={(e) => setSort(e.target.value as SortOption)}
-          className="border border-navy/10 rounded px-4 py-2 bg-white focus:outline-none focus:border-electric-blue md:ml-auto"
+          className="border border-navy/20 rounded-full px-4 py-2 bg-transparent text-xs font-mono tracking-wider uppercase focus:outline-none focus:border-navy md:ml-auto"
         >
           <option value="recent">Mais recente</option>
           <option value="price_asc">Menor preço</option>
@@ -161,44 +160,54 @@ export function CatalogClient({
 
       {/* ─── Filtros ativos ─── */}
       {(selectedArea || selectedType) && (
-        <div className="flex flex-wrap items-center gap-2 mb-6">
-          <span className="text-sm text-navy/50">Filtrando por:</span>
+        <div className="flex flex-wrap items-center gap-3 mb-10 pb-6 border-b border-navy/10">
+          <MonoLabel>[ filtrando ]</MonoLabel>
           {selectedArea && (
-            <span className="inline-flex items-center gap-1.5 bg-navy/5 text-navy text-sm font-medium px-3 py-1 rounded-full">
-              {PRODUCT_AREAS.find((a) => a.slug === selectedArea)?.icon}{" "}
+            <span className="inline-flex items-center gap-2 bg-navy text-cream text-xs font-mono tracking-wider uppercase px-3 py-1.5 rounded-full">
               {PRODUCT_AREAS.find((a) => a.slug === selectedArea)?.name}
-              <button onClick={() => setSelectedArea(null)} className="ml-1 text-navy/40 hover:text-navy">
-                ✕
+              <button
+                onClick={() => setSelectedArea(null)}
+                className="text-cream/60 hover:text-cream"
+                aria-label="Remover filtro"
+              >
+                ×
               </button>
             </span>
           )}
           {selectedType && (
-            <span className="inline-flex items-center gap-1.5 bg-navy/5 text-navy text-sm font-medium px-3 py-1 rounded-full">
-              {selectedType.charAt(0).toUpperCase() + selectedType.slice(1)}
-              <button onClick={() => setSelectedType(null)} className="ml-1 text-navy/40 hover:text-navy">
-                ✕
+            <span className="inline-flex items-center gap-2 bg-navy text-cream text-xs font-mono tracking-wider uppercase px-3 py-1.5 rounded-full">
+              {selectedType}
+              <button
+                onClick={() => setSelectedType(null)}
+                className="text-cream/60 hover:text-cream"
+                aria-label="Remover filtro"
+              >
+                ×
               </button>
             </span>
           )}
           <button
-            onClick={() => { setSelectedArea(null); setSelectedType(null); }}
-            className="text-xs text-navy/40 hover:text-navy underline ml-2"
+            onClick={() => {
+              setSelectedArea(null);
+              setSelectedType(null);
+            }}
+            className="text-xs font-mono tracking-wider uppercase text-muted hover:text-navy underline underline-offset-4"
           >
-            Limpar filtros
+            Limpar
           </button>
         </div>
       )}
 
-      {/* ─── Grid de produtos ─── */}
+      {/* ─── Grid ─── */}
       {filtered.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filtered.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
         </div>
       ) : (
-        <p className="text-navy/50 text-center py-12">
-          Nenhum produto encontrado.
+        <p className="text-muted text-center py-20 font-serif italic text-2xl">
+          Nada encontrado.
         </p>
       )}
     </>

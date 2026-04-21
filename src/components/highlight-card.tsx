@@ -1,3 +1,7 @@
+"use client";
+
+import { useState } from "react";
+
 const ICONS: Record<string, React.ReactNode> = {
   chart: (
     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -40,18 +44,74 @@ export function HighlightCard({
   icon,
   title,
   description,
+  number,
 }: {
   icon: string;
   title: string;
   description: string;
+  /** Optional "01", "02" etc. for editorial numbering. */
+  number?: string;
 }) {
+  const [hover, setHover] = useState(false);
   return (
-    <div className="bg-white border border-navy/5 rounded-lg p-6">
-      <div className="w-10 h-10 bg-electric-blue/10 text-electric-blue rounded-lg flex items-center justify-center mb-4">
-        {ICONS[icon] ?? ICONS.zap}
+    <div
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+      className="relative p-10 min-h-[320px] flex flex-col justify-between border border-navy/10 transition-all duration-500 cursor-crosshair"
+      style={{
+        background: hover ? "var(--color-navy)" : "var(--color-cream-2)",
+        color: hover ? "var(--color-cream)" : "var(--color-navy)",
+      }}
+    >
+      {number && (
+        <span
+          className="font-mono text-xs"
+          style={{ color: hover ? "var(--color-electric-blue)" : "var(--color-muted)" }}
+        >
+          / {number}
+        </span>
+      )}
+      {!number && (
+        <div
+          className="w-10 h-10 rounded-md grid place-items-center"
+          style={{
+            background: hover ? "rgba(242,235,221,0.1)" : "rgba(59,130,246,0.1)",
+            color: hover ? "var(--color-cream)" : "var(--color-electric-blue)",
+          }}
+        >
+          {ICONS[icon] ?? ICONS.zap}
+        </div>
+      )}
+      <div>
+        <h4
+          className="font-serif italic"
+          style={{
+            fontSize: "clamp(28px, 2.6vw, 40px)",
+            lineHeight: 1.05,
+            letterSpacing: "-0.02em",
+            marginBottom: 12,
+          }}
+        >
+          {title}
+        </h4>
+        <p className="text-[15px] leading-relaxed opacity-80 max-w-[340px]">
+          {description}
+        </p>
       </div>
-      <h3 className="font-bold mb-2">{title}</h3>
-      <p className="text-navy/60 text-sm leading-relaxed">{description}</p>
+      <div
+        className="self-end w-11 h-11 rounded-full grid place-items-center transition-all duration-300"
+        style={{
+          background: hover ? "var(--color-electric-blue)" : "transparent",
+          border: hover ? "none" : "1px solid currentColor",
+          color: hover ? "white" : "inherit",
+          transform: hover ? "rotate(-45deg)" : "rotate(0)",
+        }}
+        aria-hidden="true"
+      >
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.6">
+          <path d="M2 8 h12 M9 3 l5 5 -5 5" />
+        </svg>
+      </div>
     </div>
   );
 }

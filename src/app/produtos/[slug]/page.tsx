@@ -12,7 +12,9 @@ import { HighlightCard } from "@/components/highlight-card";
 import { JsonLd } from "@/components/json-ld";
 import { Breadcrumb } from "@/components/breadcrumb";
 import { TestimonialCard } from "@/components/testimonial-card";
-import { FadeIn } from "@/components/fade-in";
+import { MonoLabel } from "@/components/mono-label";
+import { EditorialHeading, Italic } from "@/components/editorial-heading";
+import { Reveal } from "@/components/reveal";
 import { PRODUCT_CONTENT } from "@/lib/product-content";
 
 export const dynamic = "force-dynamic";
@@ -72,10 +74,6 @@ export default async function ProductPage({
 
   const content = PRODUCT_CONTENT[slug];
 
-  // DEBUG: log para diagnóstico (remover depois)
-  console.log("[ProductPage] slug:", slug, "| content keys:", Object.keys(PRODUCT_CONTENT).join(", "), "| found:", !!content);
-
-  // Fallback: se não tem conteúdo estruturado, renderiza layout simples
   if (!content) {
     return <FallbackLayout product={product} />;
   }
@@ -84,253 +82,352 @@ export default async function ProductPage({
 
   return (
     <>
-      <JsonLd schema={{
-        "@context": "https://schema.org",
-        "@type": "Product",
-        name: product.name,
-        description: content?.tagline ?? product.description ?? undefined,
-        image: content?.heroImage ? `https://doislabs.com.br${content.heroImage}` : undefined,
-        url: `https://doislabs.com.br/produtos/${slug}`,
-        brand: { "@type": "Brand", name: "Dois Labs" },
-        offers: {
-          "@type": "Offer",
-          price: priceInBRL,
-          priceCurrency: "BRL",
-          availability: "https://schema.org/InStock",
-          seller: { "@type": "Organization", name: "Dois Labs" },
-        },
-      }} />
+      <JsonLd
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "Product",
+          name: product.name,
+          description: content?.tagline ?? product.description ?? undefined,
+          image: content?.heroImage ? `https://doislabs.com.br${content.heroImage}` : undefined,
+          url: `https://doislabs.com.br/produtos/${slug}`,
+          brand: { "@type": "Brand", name: "Dois Labs" },
+          offers: {
+            "@type": "Offer",
+            price: priceInBRL,
+            priceCurrency: "BRL",
+            availability: "https://schema.org/InStock",
+            seller: { "@type": "Organization", name: "Dois Labs" },
+          },
+        }}
+      />
 
-      {/* ─── Hero ─── */}
-      <section className="bg-navy text-white">
-        <div className="max-w-6xl mx-auto px-4 py-16 md:py-24">
-          <Breadcrumb items={[
-            { label: "Home", href: "/" },
-            { label: "Produtos", href: "/produtos" },
-            { label: product.name },
-          ]} />
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      {/* ─── HERO ─── */}
+      <section className="pt-[140px] pb-20 px-10 border-b border-navy/10">
+        <div className="max-w-[1400px] mx-auto">
+          <Breadcrumb
+            items={[
+              { label: "Home", href: "/" },
+              { label: "Produtos", href: "/produtos" },
+              { label: product.name },
+            ]}
+          />
+          <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-16 items-center mt-8">
             <div>
-              {product.category && (
-                <span className="inline-block text-xs uppercase tracking-widest text-electric-blue font-bold mb-4">
-                  {product.category}
-                </span>
-              )}
-              <h1 className="text-3xl md:text-5xl font-bold leading-tight">
-                {product.name}
-              </h1>
-              <p className="mt-4 text-lg text-white/80 leading-relaxed">
-                {content.tagline}
-              </p>
-              <div className="mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-4">
-                <p className="text-4xl font-bold text-white">
-                  {formatPrice(product.price_cents)}
+              <Reveal>
+                {product.category && (
+                  <MonoLabel>[ {product.category} ]</MonoLabel>
+                )}
+              </Reveal>
+              <Reveal delay={1}>
+                <EditorialHeading as="h1" size="xl" className="mt-6">
+                  {product.name}
+                </EditorialHeading>
+              </Reveal>
+              <Reveal delay={2}>
+                <p className="mt-8 text-xl text-muted leading-relaxed max-w-[540px]">
+                  {content.tagline}
                 </p>
-              </div>
-              <div className="mt-6 max-w-sm">
-                <BuyButton productId={product.id} />
-              </div>
-              <div className="mt-4 flex items-center gap-2 text-sm text-white/50">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                </svg>
-                7 dias de garantia incondicional
-              </div>
+              </Reveal>
+              <Reveal delay={3}>
+                <div className="mt-12 flex items-baseline gap-4">
+                  <span
+                    className="font-serif italic text-navy"
+                    style={{ fontSize: "clamp(48px, 6vw, 80px)", letterSpacing: "-0.02em", lineHeight: 1 }}
+                  >
+                    {formatPrice(product.price_cents)}
+                  </span>
+                  <span className="font-mono text-xs uppercase tracking-wider text-muted">
+                    pagamento único
+                  </span>
+                </div>
+                <div className="mt-8 max-w-sm">
+                  <BuyButton productId={product.id} />
+                </div>
+                <div className="mt-5 flex items-center gap-2 text-sm text-muted">
+                  <span className="w-1.5 h-1.5 rounded-full bg-electric-blue" />
+                  7 dias de garantia incondicional
+                </div>
+              </Reveal>
             </div>
 
-            {/* Hero image */}
-            <div className="hidden lg:block">
+            <Reveal delay={2}>
               {content.heroImage ? (
                 <div className="relative w-full aspect-[4/3]">
                   <Image
                     src={content.heroImage}
                     alt={product.name}
                     fill
-                    className="object-cover rounded-lg shadow-2xl"
-                    sizes="(max-width: 1024px) 0px, 50vw"
+                    className="object-cover"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
                     priority
                   />
                 </div>
               ) : (
-                <div className="aspect-[4/3] bg-white/5 rounded-lg flex items-center justify-center">
-                  <svg className="w-24 h-24 text-white/10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div className="aspect-[4/3] bg-cream-2 grid place-items-center">
+                  <svg className="w-24 h-24 text-navy/10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
                   </svg>
                 </div>
               )}
-            </div>
+            </Reveal>
           </div>
         </div>
       </section>
 
-      {/* ─── Gallery ─── */}
+      {/* ─── GALLERY ─── */}
       {content.gallery.length > 0 && (
-        <section className="bg-cream">
-          <div className="max-w-6xl mx-auto px-4 py-16">
-            <h2 className="text-2xl font-bold mb-6">Veja por dentro</h2>
+        <section className="px-10 py-24 border-b border-navy/10">
+          <div className="max-w-[1400px] mx-auto">
+            <Reveal className="mb-12">
+              <MonoLabel>[ galeria ]</MonoLabel>
+              <EditorialHeading size="lg" className="mt-5">
+                Veja <Italic>por dentro</Italic>.
+              </EditorialHeading>
+            </Reveal>
             <ImageGallery images={content.gallery} />
           </div>
         </section>
       )}
 
-      {/* ─── Highlights ─── */}
-      <section className="bg-white">
-        <div className="max-w-6xl mx-auto px-4 py-16">
+      {/* ─── HIGHLIGHTS ─── */}
+      <section className="bg-cream-2 px-10 py-24 border-b border-navy/10">
+        <div className="max-w-[1400px] mx-auto">
+          <Reveal className="mb-16">
+            <MonoLabel>[ destaques ]</MonoLabel>
+            <EditorialHeading size="lg" className="mt-5">
+              O que <Italic accent>você recebe</Italic>.
+            </EditorialHeading>
+          </Reveal>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {content.highlights.map((h, i) => (
-              <FadeIn key={i} delay={i * 80}>
-                <HighlightCard icon={h.icon} title={h.title} description={h.description} />
-              </FadeIn>
+              <Reveal key={i} delay={Math.min(i + 1, 4) as 1 | 2 | 3 | 4}>
+                <HighlightCard
+                  icon={h.icon}
+                  title={h.title}
+                  description={h.description}
+                  number={String(i + 1).padStart(2, "0")}
+                />
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ─── Detailed sections ─── */}
+      {/* ─── DETAILED SECTIONS ─── */}
       {content.sections.map((section, i) => (
-        <section key={i} className="bg-cream">
-          <div className="max-w-3xl mx-auto px-4 py-16">
-            <h2 className="text-2xl md:text-3xl font-bold mb-4">{section.title}</h2>
-            <p className="text-navy/70 text-lg mb-8">{section.content}</p>
-            {section.items && (
-              <div className="space-y-4">
-                {section.items.map((item, j) => {
-                  const [bold, ...rest] = item.split(" — ");
-                  const label = bold.replace(/\*\*/g, "");
-                  const desc = rest.join(" — ");
-                  return (
-                    <div key={j} className="flex gap-3">
-                      <svg className="w-5 h-5 text-electric-blue flex-none mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                      </svg>
-                      <div>
-                        <span className="font-bold">{label}</span>
-                        {desc && <span className="text-navy/60"> — {desc}</span>}
+        <section key={i} className="px-10 py-24 md:py-32 border-b border-navy/10">
+          <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-16">
+            <Reveal>
+              <MonoLabel>[ 0{i + 1} ]</MonoLabel>
+            </Reveal>
+            <Reveal delay={1}>
+              <EditorialHeading size="lg">{section.title}</EditorialHeading>
+              <p className="mt-8 text-xl text-muted leading-relaxed max-w-[640px]">
+                {section.content}
+              </p>
+              {section.items && (
+                <div className="mt-10 space-y-1">
+                  {section.items.map((item, j) => {
+                    const [bold, ...rest] = item.split(" — ");
+                    const label = bold.replace(/\*\*/g, "");
+                    const desc = rest.join(" — ");
+                    return (
+                      <div
+                        key={j}
+                        className="grid grid-cols-[40px_1fr] gap-6 py-6 border-t border-navy/15 last:border-b"
+                      >
+                        <span className="font-mono text-sm text-electric-blue">
+                          {String(j + 1).padStart(2, "0")}
+                        </span>
+                        <div>
+                          <span
+                            className="font-serif italic"
+                            style={{ fontSize: "clamp(20px, 1.6vw, 26px)", letterSpacing: "-0.01em" }}
+                          >
+                            {label}
+                          </span>
+                          {desc && (
+                            <p className="mt-2 text-base text-muted leading-relaxed">
+                              {desc}
+                            </p>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                  );
-                })}
-              </div>
-            )}
+                    );
+                  })}
+                </div>
+              )}
+            </Reveal>
           </div>
         </section>
       ))}
 
-      {/* ─── Audience ─── */}
-      <section className="bg-navy/5">
-        <div className="max-w-3xl mx-auto px-4 py-16">
-          <h2 className="text-2xl md:text-3xl font-bold mb-8">Para quem é</h2>
-          <div className="space-y-4">
+      {/* ─── AUDIENCE ─── */}
+      <section className="bg-cream-2 px-10 py-24 md:py-32 border-b border-navy/10">
+        <div className="max-w-[1400px] mx-auto">
+          <Reveal className="mb-16">
+            <MonoLabel>[ público ]</MonoLabel>
+            <EditorialHeading size="xl" className="mt-5">
+              Para <Italic>quem</Italic> é.
+            </EditorialHeading>
+          </Reveal>
+          <div className="space-y-1">
             {content.audience.map((item, i) => (
-              <div key={i} className="flex gap-3">
-                <svg className="w-5 h-5 text-green-600 flex-none mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-                <p className="text-navy/80">{item}</p>
-              </div>
+              <Reveal
+                key={i}
+                delay={Math.min(i + 1, 5) as 1 | 2 | 3 | 4 | 5}
+                className="grid grid-cols-[40px_1fr] gap-6 py-8 border-t border-navy/20 last:border-b"
+              >
+                <span className="font-mono text-sm text-electric-blue">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <p className="text-lg md:text-xl text-navy leading-relaxed">{item}</p>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ─── Requirements ─── */}
+      {/* ─── REQUIREMENTS ─── */}
       {content.requirements && (
-        <section className="bg-white">
-          <div className="max-w-3xl mx-auto px-4 py-12 text-center">
-            <p className="text-navy/50 text-sm">
-              <span className="font-bold">Requisitos:</span> {content.requirements}
+        <section className="px-10 py-12 border-b border-navy/10">
+          <div className="max-w-[1400px] mx-auto text-center">
+            <p className="text-sm text-muted">
+              <span className="font-mono tracking-wider uppercase text-xs">
+                Requisitos
+              </span>{" "}
+              — {content.requirements}
             </p>
           </div>
         </section>
       )}
 
-      {/* ─── Testimonials ─── */}
+      {/* ─── TESTIMONIALS ─── */}
       {content.testimonials && content.testimonials.length > 0 && (
-        <section className="bg-cream">
-          <div className="max-w-6xl mx-auto px-4 py-16">
-            <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">O que dizem quem usa</h2>
+        <section className="px-10 py-24 md:py-32 border-b border-navy/10">
+          <div className="max-w-[1400px] mx-auto">
+            <Reveal className="mb-16">
+              <MonoLabel>[ depoimentos ]</MonoLabel>
+              <EditorialHeading size="lg" className="mt-5">
+                Quem <Italic>usa</Italic> fala.
+              </EditorialHeading>
+            </Reveal>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {content.testimonials.map((t, i) => (
-                <FadeIn key={i} delay={i * 100}>
+                <Reveal key={i} delay={Math.min(i + 1, 3) as 1 | 2 | 3}>
                   <TestimonialCard name={t.name} role={t.role} text={t.text} />
-                </FadeIn>
+                </Reveal>
               ))}
             </div>
           </div>
         </section>
       )}
 
-      {/* ─── CTA Final ─── */}
-      <section className="bg-navy text-white">
-        <div className="max-w-xl mx-auto px-4 py-16 text-center">
-          <p className="text-3xl font-bold mb-2">{formatPrice(product.price_cents)}</p>
-          <p className="text-white/50 text-sm mb-6">Pagamento único · Acesso imediato</p>
-          <div className="max-w-xs mx-auto">
-            <BuyButton productId={product.id} />
-          </div>
-          <p className="mt-4 text-white/40 text-sm">7 dias de garantia incondicional</p>
-          <p className="mt-8 text-white/50 italic text-sm max-w-md mx-auto">
-            {content.closingLine}
-          </p>
+      {/* ─── FAQ ─── */}
+      <section className="px-10 py-24 md:py-32 border-b border-navy/10">
+        <div className="max-w-[1000px] mx-auto">
+          <Reveal className="mb-12">
+            <MonoLabel>[ dúvidas ]</MonoLabel>
+            <EditorialHeading size="lg" className="mt-5">
+              Perguntas <Italic>frequentes</Italic>.
+            </EditorialHeading>
+          </Reveal>
+          <Reveal delay={1}>
+            <FaqAccordion items={content.faq} />
+          </Reveal>
         </div>
       </section>
 
-      {/* ─── FAQ ─── */}
-      <section className="bg-cream">
-        <div className="max-w-3xl mx-auto px-4 py-16">
-          <h2 className="text-2xl font-bold mb-6">Perguntas Frequentes</h2>
-          <FaqAccordion items={content.faq} />
-        </div>
+      {/* ─── CTA FINAL ─── */}
+      <section className="bg-navy text-cream px-10 py-24 md:py-32 text-center">
+        <Reveal className="max-w-[800px] mx-auto">
+          <EditorialHeading as="h2" size="xl">
+            Pronto pra <Italic accent>começar</Italic>?
+          </EditorialHeading>
+          <p className="mt-6 text-lg text-cream/60 italic font-serif max-w-md mx-auto">
+            {content.closingLine}
+          </p>
+          <p
+            className="mt-10 font-serif italic"
+            style={{ fontSize: "clamp(48px, 6vw, 80px)", letterSpacing: "-0.02em", lineHeight: 1 }}
+          >
+            {formatPrice(product.price_cents)}
+          </p>
+          <p className="mt-3 font-mono text-xs uppercase tracking-wider text-cream/50">
+            Pagamento único · Acesso imediato
+          </p>
+          <div className="mt-10 max-w-xs mx-auto">
+            <BuyButton productId={product.id} />
+          </div>
+          <p className="mt-5 text-cream/40 text-sm">7 dias de garantia incondicional</p>
+        </Reveal>
       </section>
     </>
   );
 }
 
-/* ─── Fallback para produtos sem conteúdo estruturado ─── */
+/* ─── Fallback ─── */
 function FallbackLayout({ product }: { product: Product }) {
   return (
-    <div className="max-w-6xl mx-auto px-4 py-12">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-        <div className="aspect-[4/3] bg-navy/5 rounded-lg overflow-hidden">
-          {product.image_url ? (
-            <Image src={product.image_url} alt={product.name} fill className="object-cover" sizes="(max-width: 768px) 100vw, 50vw" />
-          ) : (
-            <div className="w-full h-full flex items-center justify-center text-navy/20">
-              <svg className="w-24 h-24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-              </svg>
+    <section className="pt-[140px] pb-24 px-10">
+      <div className="max-w-[1400px] mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+          <div className="relative aspect-[4/3] bg-cream-2 overflow-hidden">
+            {product.image_url ? (
+              <Image
+                src={product.image_url}
+                alt={product.name}
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+            ) : (
+              <div className="w-full h-full grid place-items-center text-navy/20">
+                <svg className="w-24 h-24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                </svg>
+              </div>
+            )}
+          </div>
+          <div>
+            {product.category && <MonoLabel>[ {product.category} ]</MonoLabel>}
+            <EditorialHeading as="h1" size="xl" className="mt-6">
+              {product.name}
+            </EditorialHeading>
+            <p
+              className="mt-10 font-serif italic text-electric-blue"
+              style={{ fontSize: "clamp(40px, 5vw, 64px)", letterSpacing: "-0.02em", lineHeight: 1 }}
+            >
+              {formatPrice(product.price_cents)}
+            </p>
+            <div className="mt-8 max-w-sm">
+              <BuyButton productId={product.id} />
             </div>
-          )}
+            <div className="mt-4 flex items-center gap-2 text-sm text-muted">
+              <span className="w-1.5 h-1.5 rounded-full bg-electric-blue" />
+              7 dias de garantia incondicional
+            </div>
+          </div>
         </div>
-        <div>
-          {product.category && (
-            <span className="text-sm uppercase tracking-wider text-navy/50 font-bold">{product.category}</span>
-          )}
-          <h1 className="text-3xl md:text-4xl font-bold mt-2">{product.name}</h1>
-          <p className="text-3xl font-bold text-electric-blue mt-4">{formatPrice(product.price_cents)}</p>
-          <div className="mt-6">
-            <BuyButton productId={product.id} />
+        {product.description && (
+          <div className="mt-24 max-w-[780px]">
+            <MonoLabel>[ sobre ]</MonoLabel>
+            <EditorialHeading size="lg" className="mt-5 mb-8">
+              Sobre o <Italic>produto</Italic>.
+            </EditorialHeading>
+            <div className="prose prose-navy max-w-none text-lg text-muted leading-relaxed">
+              <ReactMarkdown>{product.description}</ReactMarkdown>
+            </div>
           </div>
-          <div className="mt-4 flex items-center gap-2 text-sm text-navy/60">
-            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-            </svg>
-            7 dias de garantia incondicional
-          </div>
+        )}
+        <div className="mt-24 max-w-[1000px]">
+          <MonoLabel>[ dúvidas ]</MonoLabel>
+          <EditorialHeading size="lg" className="mt-5 mb-8">
+            Perguntas <Italic>frequentes</Italic>.
+          </EditorialHeading>
+          <FaqAccordion />
         </div>
       </div>
-      {product.description && (
-        <div className="mt-16">
-          <h2 className="text-2xl font-bold mb-6">Sobre o produto</h2>
-          <div className="prose prose-navy max-w-none">
-            <ReactMarkdown>{product.description}</ReactMarkdown>
-          </div>
-        </div>
-      )}
-      <div className="mt-16">
-        <h2 className="text-2xl font-bold mb-6">Perguntas Frequentes</h2>
-        <FaqAccordion />
-      </div>
-    </div>
+    </section>
   );
 }

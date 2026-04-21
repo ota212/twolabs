@@ -1,15 +1,31 @@
 import type { Metadata } from "next";
-import { DM_Sans } from "next/font/google";
+import { Inter, Instrument_Serif, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { PostHogProvider } from "@/components/posthog-provider";
 import { Analytics } from "@vercel/analytics/next";
 
-const dmSans = DM_Sans({
+const inter = Inter({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-dm-sans",
+  weight: ["300", "400", "500", "600", "700", "800"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const instrumentSerif = Instrument_Serif({
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  variable: "--font-instrument-serif",
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  variable: "--font-jetbrains-mono",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -58,7 +74,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pt-BR" className={dmSans.variable}>
+    <html
+      lang="pt-BR"
+      className={`${inter.variable} ${instrumentSerif.variable} ${jetbrainsMono.variable}`}
+    >
       <body className="bg-cream text-navy font-sans antialiased min-h-screen flex flex-col">
         <PostHogProvider>
           <Navbar />

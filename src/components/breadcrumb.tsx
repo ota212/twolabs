@@ -5,19 +5,33 @@ interface BreadcrumbItem {
   href?: string;
 }
 
-export function Breadcrumb({ items }: { items: BreadcrumbItem[] }) {
+interface BreadcrumbProps {
+  items: BreadcrumbItem[];
+  /** "light" = on cream bg; "dark" = on navy bg */
+  variant?: "light" | "dark";
+}
+
+export function Breadcrumb({ items, variant = "light" }: BreadcrumbProps) {
+  const base =
+    variant === "dark"
+      ? { muted: "text-white/50", strong: "text-white/80", hover: "hover:text-white" }
+      : { muted: "text-navy/50", strong: "text-navy", hover: "hover:text-electric-blue" };
+
   return (
-    <nav aria-label="Breadcrumb" className="text-sm text-white/50 mb-6">
-      <ol className="flex items-center gap-1.5">
+    <nav
+      aria-label="Breadcrumb"
+      className={`font-mono text-xs tracking-[0.1em] mb-6 ${base.muted}`}
+    >
+      <ol className="flex items-center gap-2">
         {items.map((item, i) => (
-          <li key={i} className="flex items-center gap-1.5">
-            {i > 0 && <span>/</span>}
+          <li key={i} className="flex items-center gap-2">
+            {i > 0 && <span aria-hidden="true">/</span>}
             {item.href ? (
-              <Link href={item.href} className="hover:text-white/80 transition-colors">
+              <Link href={item.href} className={`transition-colors ${base.hover}`}>
                 {item.label}
               </Link>
             ) : (
-              <span className="text-white/80">{item.label}</span>
+              <span className={base.strong}>{item.label}</span>
             )}
           </li>
         ))}

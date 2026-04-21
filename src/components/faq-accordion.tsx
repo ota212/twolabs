@@ -31,37 +31,62 @@ const DEFAULT_FAQ: FaqItem[] = [
 ];
 
 export function FaqAccordion({ items }: { items?: { q: string; a: string }[] }) {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const faqItems: FaqItem[] = items
     ? items.map((i) => ({ question: i.q, answer: i.a }))
     : DEFAULT_FAQ;
 
   return (
-    <div className="space-y-2">
-      {faqItems.map((item, index) => (
-        <div key={index} className="border border-navy/10 rounded">
-          <button
-            onClick={() => setOpenIndex(openIndex === index ? null : index)}
-            className="w-full text-left px-4 py-3 font-bold flex items-center justify-between hover:bg-navy/5 transition-colors"
+    <div>
+      {faqItems.map((item, index) => {
+        const isOpen = openIndex === index;
+        const isLast = index === faqItems.length - 1;
+        return (
+          <div
+            key={index}
+            className={`border-t border-navy ${isLast ? "border-b" : ""}`}
           >
-            {item.question}
-            <svg
-              className={`w-5 h-5 text-navy/40 flex-none transition-transform ${
-                openIndex === index ? "rotate-180" : ""
-              }`}
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+            <button
+              onClick={() => setOpenIndex(isOpen ? null : index)}
+              className="w-full flex items-center justify-between text-left py-8"
             >
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-            </svg>
-          </button>
-          {openIndex === index && (
-            <div className="px-4 pb-4 text-navy/70 leading-relaxed">{item.answer}</div>
-          )}
-        </div>
-      ))}
+              <span
+                className="pr-6"
+                style={{
+                  fontSize: "clamp(18px, 1.8vw, 24px)",
+                  letterSpacing: "-0.01em",
+                  lineHeight: 1.3,
+                }}
+              >
+                {item.question}
+              </span>
+              <span
+                className="flex-none w-11 h-11 rounded-full grid place-items-center transition-all duration-300"
+                style={{
+                  background: isOpen ? "var(--color-electric-blue)" : "transparent",
+                  border: isOpen ? "none" : "1px solid var(--color-navy)",
+                  color: isOpen ? "white" : "var(--color-navy)",
+                  transform: isOpen ? "rotate(45deg)" : "none",
+                }}
+                aria-hidden="true"
+              >
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.8">
+                  <path d="M7 1v12 M1 7h12" />
+                </svg>
+              </span>
+            </button>
+            <div
+              className="overflow-hidden transition-[max-height] duration-500 ease-out"
+              style={{ maxHeight: isOpen ? 400 : 0 }}
+            >
+              <p className="pb-8 pr-16 text-[17px] leading-relaxed text-navy/65 max-w-[780px]">
+                {item.answer}
+              </p>
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 }
