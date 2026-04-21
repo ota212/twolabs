@@ -366,7 +366,7 @@ export default async function Home({
           aria-hidden="true"
           className="absolute -top-32 -right-20 w-[620px] h-[620px] rounded-full opacity-40 pointer-events-none"
           style={{
-            background: "radial-gradient(circle, #3B82F6 0%, transparent 65%)",
+            background: "radial-gradient(circle, #E85D3A 0%, transparent 65%)",
             filter: "blur(60px)",
           }}
         />
@@ -424,7 +424,7 @@ export default async function Home({
           <Reveal delay={2} className="mt-20 flex flex-wrap items-center gap-6">
             <Link
               href="/produtos"
-              className="inline-flex items-center gap-4 px-9 py-6 bg-electric-blue text-white rounded-full text-lg hover:brightness-110 transition-all focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cream shadow-[0_20px_40px_-10px_rgba(59,130,246,0.5)]"
+              className="inline-flex items-center gap-4 px-9 py-6 bg-electric-blue text-white rounded-full text-lg hover:brightness-110 transition-all focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cream shadow-[0_20px_40px_-10px_rgba(232,93,58,0.5)]"
             >
               Ver todos os produtos
               <span className="text-xl">→</span>

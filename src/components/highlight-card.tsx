@@ -75,7 +75,7 @@ export function HighlightCard({
         <div
           className="w-10 h-10 rounded-md grid place-items-center"
           style={{
-            background: hover ? "rgba(242,235,221,0.1)" : "rgba(59,130,246,0.1)",
+            background: hover ? "rgba(242,235,221,0.1)" : "rgba(232,93,58,0.1)",
             color: hover ? "var(--color-cream)" : "var(--color-electric-blue)",
           }}
         >

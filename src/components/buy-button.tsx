@@ -33,7 +33,7 @@ export function BuyButton({ productId }: { productId: string }) {
       <button
         onClick={handleBuy}
         disabled={loading}
-        className="w-full min-h-[52px] bg-electric-blue text-white font-medium py-4 rounded-full text-lg hover:brightness-110 transition-all disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-electric-blue shadow-[0_10px_30px_-10px_rgba(59,130,246,0.55)]"
+        className="w-full min-h-[52px] bg-electric-blue text-white font-medium py-4 rounded-full text-lg hover:brightness-110 transition-all disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-electric-blue shadow-[0_10px_30px_-10px_rgba(232,93,58,0.55)]"
         aria-busy={loading}
       >
         {loading ? "Redirecionando..." : "Comprar Agora"}

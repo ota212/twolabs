@@ -6,12 +6,14 @@
   --color-cream-2: #E8DFCB;
   --color-navy: #1A3A5C;
   --color-navy-soft: #2D4F73;
-  --color-electric-blue: #3B82F6;
+  /* Accent: Vooz-style warm orange — pairs with cream bg better than blue. */
+  --color-electric-blue: #E85D3A;
   --color-ink: #0F1E2E;
   --color-muted: #6B7A8C;
 
-  /* Legacy aliases (keep for existing classes) */
-  --color-accent: #3B82F6;
+  /* Preferred alias — use `accent` in new code; electric-blue kept for
+     backwards-compat with 25 existing references. Same color. */
+  --color-accent: #E85D3A;
 
   /* Fonts */
   --font-sans: var(--font-inter), system-ui, sans-serif;
