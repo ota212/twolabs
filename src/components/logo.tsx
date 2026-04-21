@@ -11,7 +11,7 @@ interface LogoProps {
 }
 
 export function Logo({ variant = "dark", size, height }: LogoProps) {
-  const color = variant === "light" ? "#F2EBDD" : "#1A3A5C";
+  const color = variant === "light" ? "#F2EBDD" : "#0F2A22";
   const fontSize = size ?? height ?? 32;
 
   return (
@@ -31,7 +31,7 @@ export function Logo({ variant = "dark", size, height }: LogoProps) {
 }
 
 export function LogoIcon({ variant = "dark", size = 32 }: LogoProps) {
-  const color = variant === "light" ? "#F2EBDD" : "#1A3A5C";
+  const color = variant === "light" ? "#F2EBDD" : "#0F2A22";
   return (
     <span
       aria-label="Dois Labs"

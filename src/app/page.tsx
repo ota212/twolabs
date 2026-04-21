@@ -374,7 +374,7 @@ export default async function Home({
           aria-hidden="true"
           className="absolute -bottom-40 -left-24 w-[540px] h-[540px] rounded-full opacity-30 pointer-events-none"
           style={{
-            background: "radial-gradient(circle, #2D4F73 0%, transparent 70%)",
+            background: "radial-gradient(circle, #1A3D31 0%, transparent 70%)",
             filter: "blur(70px)",
           }}
         />

@@ -4,12 +4,14 @@
   /* Palette */
   --color-cream: #F2EBDD;
   --color-cream-2: #E8DFCB;
-  --color-navy: #1A3A5C;
-  --color-navy-soft: #2D4F73;
+  /* Vooz forest-green palette. Kept class name `navy` for backwards-compat
+     with 100+ existing references; hex flipped to deep forest. */
+  --color-navy: #0F2A22;
+  --color-navy-soft: #1A3D31;
   /* Accent: Vooz-style warm orange — pairs with cream bg better than blue. */
   --color-electric-blue: #E85D3A;
-  --color-ink: #0F1E2E;
-  --color-muted: #6B7A8C;
+  --color-ink: #0A1410;
+  --color-muted: #5A6B63;
 
   /* Preferred alias — use `accent` in new code; electric-blue kept for
      backwards-compat with 25 existing references. Same color. */
@@ -73,7 +75,7 @@
     background: transparent;
   }
   ::-webkit-scrollbar-thumb {
-    background: rgba(26, 58, 92, 0.2);
+    background: rgba(15, 42, 34, 0.2);
     border-radius: 10px;
   }
 }

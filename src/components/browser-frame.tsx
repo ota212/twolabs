@@ -20,7 +20,7 @@ export function BrowserFrame({
 }: BrowserFrameProps) {
   return (
     <div
-      className={`relative flex flex-col w-full h-full overflow-hidden rounded-t-md bg-cream border border-navy/10 shadow-[0_10px_40px_-20px_rgba(26,58,92,0.35)] ${className}`}
+      className={`relative flex flex-col w-full h-full overflow-hidden rounded-t-md bg-cream border border-navy/10 shadow-[0_10px_40px_-20px_rgba(15,42,34,0.35)] ${className}`}
     >
       {/* Chrome bar */}
       <div className="flex-none flex items-center gap-2 px-3 py-2 bg-cream-2 border-b border-navy/10">

@@ -46,7 +46,7 @@ export function Navbar() {
         backdropFilter: scrolled ? "blur(12px)" : "none",
         WebkitBackdropFilter: scrolled ? "blur(12px)" : "none",
         borderBottom: scrolled
-          ? "1px solid rgba(26, 58, 92, 0.08)"
+          ? "1px solid rgba(15, 42, 34, 0.08)"
           : "1px solid transparent",
       }}
     >
@@ -91,7 +91,7 @@ export function Navbar() {
                 role="menu"
                 className="absolute left-1/2 -translate-x-1/2 top-full pt-4 w-[340px]"
               >
-                <div className="bg-cream border border-navy/10 shadow-[0_20px_60px_-20px_rgba(26,58,92,0.35)] rounded-lg overflow-hidden">
+                <div className="bg-cream border border-navy/10 shadow-[0_20px_60px_-20px_rgba(15,42,34,0.35)] rounded-lg overflow-hidden">
                   <div className="px-5 py-3 border-b border-navy/10 flex items-center justify-between">
                     <span className="font-mono text-[10px] uppercase tracking-wider text-muted">
                       [ áreas ]

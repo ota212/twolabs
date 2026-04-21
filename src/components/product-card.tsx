@@ -38,7 +38,7 @@ export function ProductCard({
   return (
     <Link
       href={`/produtos/${product.slug}`}
-      className="group relative block bg-cream-2 border border-navy/10 overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-navy hover:shadow-[0_24px_60px_-30px_rgba(26,58,92,0.45)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-electric-blue"
+      className="group relative block bg-cream-2 border border-navy/10 overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-navy hover:shadow-[0_24px_60px_-30px_rgba(15,42,34,0.45)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-electric-blue"
     >
       {/* Category tag (top-left, always visible) */}
       <span className="absolute top-4 left-4 z-10 inline-flex items-center gap-1.5 bg-cream/95 backdrop-blur-sm border border-navy/10 rounded-full px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-navy">
