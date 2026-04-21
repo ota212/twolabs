@@ -11,7 +11,7 @@ export function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-10 pb-14 border-b border-cream/15">
           {/* Categorias */}
           <div>
-            <h4 className="font-mono text-[11px] uppercase tracking-wider text-cream/50 mb-5">
+            <h4 className="font-mono text-[11px] uppercase tracking-wider text-cream/65 mb-5">
               Categorias
             </h4>
             <ul className="space-y-3 text-sm">
@@ -47,7 +47,7 @@ export function Footer() {
 
           {/* Sobre */}
           <div>
-            <h4 className="font-mono text-[11px] uppercase tracking-wider text-cream/50 mb-5">
+            <h4 className="font-mono text-[11px] uppercase tracking-wider text-cream/65 mb-5">
               Sobre
             </h4>
             <ul className="space-y-3 text-sm">
@@ -76,7 +76,7 @@ export function Footer() {
 
           {/* Suporte */}
           <div>
-            <h4 className="font-mono text-[11px] uppercase tracking-wider text-cream/50 mb-5">
+            <h4 className="font-mono text-[11px] uppercase tracking-wider text-cream/65 mb-5">
               Suporte
             </h4>
             <ul className="space-y-3 text-sm">
@@ -93,13 +93,13 @@ export function Footer() {
                   contato@doislabs.com.br
                 </a>
               </li>
-              <li className="text-cream/50 text-xs">Resposta em até 24h úteis</li>
+              <li className="text-cream/65 text-xs">Resposta em até 24h úteis</li>
             </ul>
           </div>
 
           {/* Legal */}
           <div>
-            <h4 className="font-mono text-[11px] uppercase tracking-wider text-cream/50 mb-5">
+            <h4 className="font-mono text-[11px] uppercase tracking-wider text-cream/65 mb-5">
               Legal
             </h4>
             <ul className="space-y-3 text-sm">
@@ -118,7 +118,7 @@ export function Footer() {
                   LGPD
                 </Link>
               </li>
-              <li className="text-cream/40 text-xs pt-2 font-mono">
+              <li className="text-cream/60 text-xs pt-2 font-mono">
                 CNPJ xx.xxx.xxx/0001-xx
               </li>
             </ul>
@@ -126,7 +126,7 @@ export function Footer() {
 
           {/* Newsletter */}
           <div className="col-span-2 md:col-span-4 lg:col-span-1">
-            <h4 className="font-mono text-[11px] uppercase tracking-wider text-cream/50 mb-5">
+            <h4 className="font-mono text-[11px] uppercase tracking-wider text-cream/65 mb-5">
               Novidades
             </h4>
             <p className="text-sm text-cream/70 mb-4 max-w-[260px]">
@@ -146,7 +146,7 @@ export function Footer() {
                 type="email"
                 required
                 placeholder="seu@email.com"
-                className="flex-1 min-w-0 px-4 py-3 bg-cream/10 border border-cream/20 rounded-full text-sm text-cream placeholder:text-cream/40 focus:outline-none focus:border-electric-blue focus:bg-cream/15"
+                className="flex-1 min-w-0 px-4 py-3 bg-cream/10 border border-cream/20 rounded-full text-sm text-cream placeholder:text-cream/60 focus:outline-none focus:border-electric-blue focus:bg-cream/15"
               />
               <button
                 type="submit"
@@ -173,10 +173,10 @@ export function Footer() {
 
         {/* Bottom row */}
         <div className="mt-10 pt-8 border-t border-cream/15 flex flex-wrap justify-between gap-6 text-xs">
-          <span className="font-mono text-cream/50">
+          <span className="font-mono text-cream/65">
             © {year} Dois Labs — produtos digitais que rodam sozinhos.
           </span>
-          <span className="font-mono text-cream/50">
+          <span className="font-mono text-cream/65">
             Pagamento seguro via Stripe · SSL 256-bit
           </span>
         </div>

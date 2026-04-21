@@ -28,6 +28,36 @@
     font-feature-settings: "ss01", "cv11";
   }
 
+  /* Global focus-visible fallback — any interactive element without a
+     component-level focus style still gets a visible ring. */
+  a:focus-visible,
+  button:focus-visible,
+  [role="button"]:focus-visible,
+  [role="menuitem"]:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 2px solid var(--color-electric-blue);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  /* Respect reduced motion — skip reveal animation + marquee. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+    .reveal {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+  }
+
   ::selection {
     background: var(--color-electric-blue);
     color: white;

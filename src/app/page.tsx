@@ -174,7 +174,7 @@ export default async function Home({
       />
 
       {/* ─── HERO ─── */}
-      <section className="relative min-h-[75vh] flex flex-col justify-center overflow-hidden pt-[160px] pb-14 px-10">
+      <section className="relative min-h-[75vh] flex flex-col justify-center overflow-hidden pt-[140px] md:pt-[160px] pb-14 px-5 md:px-10">
         <div className="max-w-[1400px] mx-auto w-full">
           <Reveal className="flex items-center gap-4 mb-8 flex-wrap">
             <span className="inline-flex items-center gap-2 px-3.5 py-2 border border-navy rounded-full text-xs tracking-[0.1em] uppercase">
@@ -226,7 +226,7 @@ export default async function Home({
       <TrustStrip />
 
       {/* ─── INTRO ─── */}
-      <section className="px-10 py-24 md:py-32 border-b border-navy/10">
+      <section className="px-5 md:px-10 py-24 md:py-32 border-b border-navy/10">
         <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-16">
           <Reveal>
             <MonoLabel>[ 02 / por que dois labs ]</MonoLabel>
@@ -247,7 +247,7 @@ export default async function Home({
       </section>
 
       {/* ─── BENEFITS ─── */}
-      <section className="px-10 py-24 md:py-32 border-b border-navy/10">
+      <section className="px-5 md:px-10 py-24 md:py-32 border-b border-navy/10">
         <div className="max-w-[1400px] mx-auto">
           <Reveal className="flex justify-between items-end mb-20 flex-wrap gap-5">
             <EditorialHeading size="md">
@@ -272,7 +272,7 @@ export default async function Home({
 
       {/* ─── FEATURED PRODUCTS ─── */}
       {products.length > 0 && (
-        <section className="px-10 py-24 md:py-32 border-b border-navy/10">
+        <section className="px-5 md:px-10 py-24 md:py-32 border-b border-navy/10">
           <div className="max-w-[1400px] mx-auto">
             <Reveal className="flex justify-between items-end mb-16 flex-wrap gap-5">
               <div>
@@ -303,7 +303,7 @@ export default async function Home({
       )}
 
       {/* ─── TESTIMONIALS ─── */}
-      <section className="px-10 py-24 md:py-32 border-b border-navy/10">
+      <section className="px-5 md:px-10 py-24 md:py-32 border-b border-navy/10">
         <div className="max-w-[1400px] mx-auto">
           <Reveal className="flex justify-between items-end mb-16 flex-wrap gap-5">
             <div>
@@ -330,7 +330,7 @@ export default async function Home({
       </section>
 
       {/* ─── PROCESS ─── */}
-      <section className="bg-cream-2 px-10 py-24 md:py-32 border-b border-navy/10">
+      <section className="bg-cream-2 px-5 md:px-10 py-24 md:py-32 border-b border-navy/10">
         <div className="max-w-[1400px] mx-auto">
           <Reveal className="grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-16 mb-16">
             <MonoLabel>[ 04 / processo ]</MonoLabel>
@@ -345,7 +345,7 @@ export default async function Home({
       </section>
 
       {/* ─── FAQ ─── */}
-      <section className="px-10 py-24 md:py-32 border-b border-navy/10">
+      <section className="px-5 md:px-10 py-24 md:py-32 border-b border-navy/10">
         <div className="max-w-[1200px] mx-auto">
           <Reveal className="mb-20">
             <MonoLabel>[ 05 / faq ]</MonoLabel>
@@ -360,7 +360,7 @@ export default async function Home({
       </section>
 
       {/* ─── CTA FINAL ─── */}
-      <section className="relative isolate overflow-hidden bg-navy text-cream px-10 py-28 md:py-36">
+      <section className="relative isolate overflow-hidden bg-navy text-cream px-5 md:px-10 py-28 md:py-36">
         {/* Mesh: 3 layered radial blobs */}
         <div
           aria-hidden="true"
@@ -457,7 +457,7 @@ export default async function Home({
                 </a>
               </div>
             </div>
-            <p className="font-mono text-[11px] uppercase tracking-wider text-cream/50 max-w-[260px]">
+            <p className="font-mono text-[11px] uppercase tracking-wider text-cream/65 max-w-[260px]">
               resposta em até 24h úteis · seg–sex
             </p>
           </Reveal>

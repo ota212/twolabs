@@ -102,7 +102,7 @@ export default async function ProductPage({
       />
 
       {/* ─── HERO ─── */}
-      <section className="pt-[140px] pb-20 px-10 border-b border-navy/10">
+      <section className="pt-[120px] md:pt-[140px] pb-20 px-5 md:px-10 border-b border-navy/10">
         <div className="max-w-[1400px] mx-auto">
           <Breadcrumb
             items={[
@@ -176,7 +176,7 @@ export default async function ProductPage({
 
       {/* ─── GALLERY ─── */}
       {content.gallery.length > 0 && (
-        <section className="px-10 py-24 border-b border-navy/10">
+        <section className="px-5 md:px-10 py-24 border-b border-navy/10">
           <div className="max-w-[1400px] mx-auto">
             <Reveal className="mb-12">
               <MonoLabel>[ galeria ]</MonoLabel>
@@ -190,7 +190,7 @@ export default async function ProductPage({
       )}
 
       {/* ─── HIGHLIGHTS ─── */}
-      <section className="bg-cream-2 px-10 py-24 border-b border-navy/10">
+      <section className="bg-cream-2 px-5 md:px-10 py-24 border-b border-navy/10">
         <div className="max-w-[1400px] mx-auto">
           <Reveal className="mb-16">
             <MonoLabel>[ destaques ]</MonoLabel>
@@ -215,7 +215,7 @@ export default async function ProductPage({
 
       {/* ─── DETAILED SECTIONS ─── */}
       {content.sections.map((section, i) => (
-        <section key={i} className="px-10 py-24 md:py-32 border-b border-navy/10">
+        <section key={i} className="px-5 md:px-10 py-24 md:py-32 border-b border-navy/10">
           <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-16">
             <Reveal>
               <MonoLabel>[ 0{i + 1} ]</MonoLabel>
@@ -263,7 +263,7 @@ export default async function ProductPage({
       ))}
 
       {/* ─── AUDIENCE ─── */}
-      <section className="bg-cream-2 px-10 py-24 md:py-32 border-b border-navy/10">
+      <section className="bg-cream-2 px-5 md:px-10 py-24 md:py-32 border-b border-navy/10">
         <div className="max-w-[1400px] mx-auto">
           <Reveal className="mb-16">
             <MonoLabel>[ público ]</MonoLabel>
@@ -290,7 +290,7 @@ export default async function ProductPage({
 
       {/* ─── REQUIREMENTS ─── */}
       {content.requirements && (
-        <section className="px-10 py-12 border-b border-navy/10">
+        <section className="px-5 md:px-10 py-12 border-b border-navy/10">
           <div className="max-w-[1400px] mx-auto text-center">
             <p className="text-sm text-muted">
               <span className="font-mono tracking-wider uppercase text-xs">
@@ -304,7 +304,7 @@ export default async function ProductPage({
 
       {/* ─── TESTIMONIALS ─── */}
       {content.testimonials && content.testimonials.length > 0 && (
-        <section className="px-10 py-24 md:py-32 border-b border-navy/10">
+        <section className="px-5 md:px-10 py-24 md:py-32 border-b border-navy/10">
           <div className="max-w-[1400px] mx-auto">
             <Reveal className="mb-16">
               <MonoLabel>[ depoimentos ]</MonoLabel>
@@ -324,7 +324,7 @@ export default async function ProductPage({
       )}
 
       {/* ─── FAQ ─── */}
-      <section className="px-10 py-24 md:py-32 border-b border-navy/10">
+      <section className="px-5 md:px-10 py-24 md:py-32 border-b border-navy/10">
         <div className="max-w-[1000px] mx-auto">
           <Reveal className="mb-12">
             <MonoLabel>[ dúvidas ]</MonoLabel>
@@ -339,7 +339,7 @@ export default async function ProductPage({
       </section>
 
       {/* ─── CTA FINAL ─── */}
-      <section className="bg-navy text-cream px-10 py-24 md:py-32 text-center">
+      <section className="bg-navy text-cream px-5 md:px-10 py-24 md:py-32 text-center">
         <Reveal className="max-w-[800px] mx-auto">
           <EditorialHeading as="h2" size="xl">
             Pronto pra <Italic accent>começar</Italic>?
@@ -353,13 +353,13 @@ export default async function ProductPage({
           >
             {formatPrice(product.price_cents)}
           </p>
-          <p className="mt-3 font-mono text-xs uppercase tracking-wider text-cream/50">
+          <p className="mt-3 font-mono text-xs uppercase tracking-wider text-cream/65">
             Pagamento único · Acesso imediato
           </p>
           <div className="mt-10 max-w-xs mx-auto">
             <BuyButton productId={product.id} />
           </div>
-          <p className="mt-5 text-cream/40 text-sm">7 dias de garantia incondicional</p>
+          <p className="mt-5 text-cream/65 text-sm">7 dias de garantia incondicional</p>
         </Reveal>
       </section>
     </>
@@ -369,7 +369,7 @@ export default async function ProductPage({
 /* ─── Fallback ─── */
 function FallbackLayout({ product }: { product: Product }) {
   return (
-    <section className="pt-[140px] pb-24 px-10">
+    <section className="pt-[120px] md:pt-[140px] pb-24 px-5 md:px-10">
       <div className="max-w-[1400px] mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
           <div className="relative aspect-[4/3] bg-cream-2 overflow-hidden">

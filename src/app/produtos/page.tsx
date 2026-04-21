@@ -31,7 +31,7 @@ export default async function ProdutosPage() {
   return (
     <>
       {/* ─── HEADER ─── */}
-      <section className="pt-[180px] pb-16 px-10 border-b border-navy/10">
+      <section className="pt-[140px] md:pt-[180px] pb-16 px-5 md:px-10 border-b border-navy/10">
         <div className="max-w-[1400px] mx-auto">
           <Reveal>
             <MonoLabel>[ catálogo ]</MonoLabel>
@@ -51,7 +51,7 @@ export default async function ProdutosPage() {
       </section>
 
       {/* ─── CATALOG ─── */}
-      <section className="px-10 py-16 md:py-20">
+      <section className="px-5 md:px-10 py-16 md:py-20">
         <div className="max-w-[1400px] mx-auto">
           <CatalogClient products={products} />
         </div>

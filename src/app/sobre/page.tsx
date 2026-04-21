@@ -81,7 +81,7 @@ export default function SobrePage() {
       </section>
 
       {/* ─── MANIFESTO ─── */}
-      <section className="bg-cream-2 px-10 py-24 md:py-32 border-y border-navy/10">
+      <section className="bg-cream-2 px-5 md:px-10 py-24 md:py-32 border-y border-navy/10">
         <div className="max-w-[1400px] mx-auto grid grid-cols-1 md:grid-cols-[1fr_2fr] gap-16">
           <Reveal>
             <MonoLabel>[ 02 / por que existimos ]</MonoLabel>
@@ -111,7 +111,7 @@ export default function SobrePage() {
       </section>
 
       {/* ─── O QUE ENTREGAMOS ─── */}
-      <section className="px-10 py-24 md:py-32 border-b border-navy/10">
+      <section className="px-5 md:px-10 py-24 md:py-32 border-b border-navy/10">
         <div className="max-w-[1400px] mx-auto">
           <Reveal className="mb-20">
             <MonoLabel>[ 03 / entrega ]</MonoLabel>
@@ -147,7 +147,7 @@ export default function SobrePage() {
       </section>
 
       {/* ─── PARA QUEM ─── */}
-      <section className="bg-cream-2 px-10 py-24 md:py-32 border-b border-navy/10">
+      <section className="bg-cream-2 px-5 md:px-10 py-24 md:py-32 border-b border-navy/10">
         <div className="max-w-[1400px] mx-auto">
           <Reveal className="mb-16">
             <MonoLabel>[ 04 / público ]</MonoLabel>
@@ -175,7 +175,7 @@ export default function SobrePage() {
       </section>
 
       {/* ─── GARANTIAS ─── */}
-      <section className="px-10 py-24 md:py-32 border-b border-navy/10">
+      <section className="px-5 md:px-10 py-24 md:py-32 border-b border-navy/10">
         <div className="max-w-[1400px] mx-auto">
           <Reveal className="mb-16">
             <MonoLabel>[ 05 / confiança ]</MonoLabel>
@@ -209,7 +209,7 @@ export default function SobrePage() {
       </section>
 
       {/* ─── CTA ─── */}
-      <section className="bg-navy text-cream px-10 py-24 md:py-32 text-center">
+      <section className="bg-navy text-cream px-5 md:px-10 py-24 md:py-32 text-center">
         <Reveal className="max-w-[800px] mx-auto">
           <EditorialHeading as="h2" size="xl">
             Pronto pra <Italic accent>resolver</Italic>?
