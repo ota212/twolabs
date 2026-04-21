@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { Product } from "@/types";
 import { ProductCard } from "@/components/product-card";
 import { MonoLabel } from "@/components/mono-label";
@@ -13,6 +13,14 @@ export function CatalogClient({ products }: { products: Product[] }) {
   const [selectedArea, setSelectedArea] = useState<string | null>(null);
   const [selectedType, setSelectedType] = useState<string | null>(null);
   const [sort, setSort] = useState<SortOption>("recent");
+
+  // Preselect area from ?area=slug on mount (e.g. nav dropdown deep-links).
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    const area = params.get("area");
+    if (area) setSelectedArea(area);
+  }, []);
 
   const productTypes = useMemo(() => {
     const types = [...new Set(products.map((p) => p.category).filter(Boolean))] as string[];
