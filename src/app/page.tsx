@@ -354,7 +354,7 @@ export default async function Home({
             </EditorialHeading>
           </Reveal>
           <Reveal delay={1}>
-            <FaqAccordion items={HOME_FAQ} />
+            <FaqAccordion items={HOME_FAQ} layout="two-column" searchable />
           </Reveal>
         </div>
       </section>
