@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useId, useState } from "react";
 
 interface FaqItem {
   question: string;
@@ -32,6 +32,7 @@ const DEFAULT_FAQ: FaqItem[] = [
 
 export function FaqAccordion({ items }: { items?: { q: string; a: string }[] }) {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const baseId = useId();
 
   const faqItems: FaqItem[] = items
     ? items.map((i) => ({ question: i.q, answer: i.a }))
@@ -42,14 +43,19 @@ export function FaqAccordion({ items }: { items?: { q: string; a: string }[] }) 
       {faqItems.map((item, index) => {
         const isOpen = openIndex === index;
         const isLast = index === faqItems.length - 1;
+        const btnId = `${baseId}-btn-${index}`;
+        const panelId = `${baseId}-panel-${index}`;
         return (
           <div
             key={index}
             className={`border-t border-navy ${isLast ? "border-b" : ""}`}
           >
             <button
+              id={btnId}
+              aria-expanded={isOpen}
+              aria-controls={panelId}
               onClick={() => setOpenIndex(isOpen ? null : index)}
-              className="w-full flex items-center justify-between text-left py-8"
+              className="w-full flex items-center justify-between text-left py-8 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-electric-blue"
             >
               <span
                 className="pr-6"
@@ -77,12 +83,17 @@ export function FaqAccordion({ items }: { items?: { q: string; a: string }[] }) 
               </span>
             </button>
             <div
-              className="overflow-hidden transition-[max-height] duration-500 ease-out"
-              style={{ maxHeight: isOpen ? 400 : 0 }}
+              id={panelId}
+              role="region"
+              aria-labelledby={btnId}
+              className="grid transition-[grid-template-rows] duration-500 ease-out"
+              style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}
             >
-              <p className="pb-8 pr-16 text-[17px] leading-relaxed text-navy/65 max-w-[780px]">
-                {item.answer}
-              </p>
+              <div className="overflow-hidden">
+                <p className="pb-8 pr-16 text-[17px] leading-relaxed text-navy/80 max-w-[780px]">
+                  {item.answer}
+                </p>
+              </div>
             </div>
           </div>
         );

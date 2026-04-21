@@ -9,6 +9,7 @@ import { EditorialHeading, Italic } from "@/components/editorial-heading";
 import { Reveal } from "@/components/reveal";
 import { HighlightCard } from "@/components/highlight-card";
 import { FaqAccordion } from "@/components/faq-accordion";
+import { ProcessStep } from "@/components/process-step";
 import { Product } from "@/types";
 
 export const metadata = {
@@ -326,20 +327,7 @@ export default async function Home({
             </EditorialHeading>
           </Reveal>
           {PROCESS.map((p, i) => (
-            <Reveal
-              key={i}
-              delay={(i + 1) as 1 | 2 | 3}
-              className={`grid grid-cols-[60px_1fr_2fr_40px] md:grid-cols-[80px_1fr_2fr_80px] gap-6 md:gap-10 items-center py-10 border-t border-navy/20 ${
-                i === PROCESS.length - 1 ? "border-b" : ""
-              }`}
-            >
-              <span className="font-mono text-sm text-electric-blue">{p.n}</span>
-              <h4 className="text-[clamp(22px,2.4vw,36px)] tracking-[-0.02em] font-medium">
-                {p.t}
-              </h4>
-              <p className="text-lg text-muted leading-relaxed">{p.d}</p>
-              <span className="text-3xl text-right opacity-40">→</span>
-            </Reveal>
+            <ProcessStep key={i} step={p} index={i} total={PROCESS.length} />
           ))}
         </div>
       </section>
