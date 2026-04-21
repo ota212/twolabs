@@ -360,18 +360,60 @@ export default async function Home({
       </section>
 
       {/* ─── CTA FINAL ─── */}
-      <section className="relative overflow-hidden bg-navy text-cream px-10 py-24 md:py-32">
+      <section className="relative isolate overflow-hidden bg-navy text-cream px-10 py-28 md:py-36">
+        {/* Mesh: 3 layered radial blobs */}
         <div
-          className="absolute -top-24 -right-24 w-[500px] h-[500px] rounded-full opacity-30 pointer-events-none"
+          aria-hidden="true"
+          className="absolute -top-32 -right-20 w-[620px] h-[620px] rounded-full opacity-40 pointer-events-none"
           style={{
-            background: "radial-gradient(circle, #3B82F6, transparent 70%)",
-            filter: "blur(40px)",
+            background: "radial-gradient(circle, #3B82F6 0%, transparent 65%)",
+            filter: "blur(60px)",
           }}
         />
+        <div
+          aria-hidden="true"
+          className="absolute -bottom-40 -left-24 w-[540px] h-[540px] rounded-full opacity-30 pointer-events-none"
+          style={{
+            background: "radial-gradient(circle, #2D4F73 0%, transparent 70%)",
+            filter: "blur(70px)",
+          }}
+        />
+        <div
+          aria-hidden="true"
+          className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[400px] h-[400px] rounded-full opacity-20 pointer-events-none"
+          style={{
+            background: "radial-gradient(circle, #6B7A8C 0%, transparent 70%)",
+            filter: "blur(80px)",
+          }}
+        />
+        {/* Grain/noise overlay */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 opacity-[0.06] mix-blend-overlay pointer-events-none"
+          style={{
+            backgroundImage:
+              "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>\")",
+            backgroundSize: "180px 180px",
+          }}
+        />
+        {/* Geometric accent: thin circle in corner */}
+        <svg
+          aria-hidden="true"
+          className="absolute -top-16 -left-16 w-[360px] h-[360px] text-electric-blue/15 pointer-events-none"
+          viewBox="0 0 100 100"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="0.4"
+        >
+          <circle cx="50" cy="50" r="48" />
+          <circle cx="50" cy="50" r="34" />
+          <circle cx="50" cy="50" r="20" />
+        </svg>
+
         <div className="max-w-[1400px] mx-auto relative">
           <Reveal className="flex items-center gap-3 mb-14">
-            <span className="w-[7px] h-[7px] rounded-full bg-electric-blue" />
-            <MonoLabel className="text-cream/70">PRÓXIMO PASSO</MonoLabel>
+            <span className="w-[7px] h-[7px] rounded-full bg-electric-blue animate-blink" />
+            <MonoLabel className="text-cream/70">próximo passo</MonoLabel>
           </Reveal>
           <Reveal delay={1}>
             <EditorialHeading as="h2" size="display" className="max-w-[1400px]">
@@ -382,21 +424,42 @@ export default async function Home({
           <Reveal delay={2} className="mt-20 flex flex-wrap items-center gap-6">
             <Link
               href="/produtos"
-              className="inline-flex items-center gap-4 px-9 py-6 bg-electric-blue text-white rounded-full text-lg hover:brightness-110 transition-all focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cream"
+              className="inline-flex items-center gap-4 px-9 py-6 bg-electric-blue text-white rounded-full text-lg hover:brightness-110 transition-all focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-cream shadow-[0_20px_40px_-10px_rgba(59,130,246,0.5)]"
             >
               Ver todos os produtos
               <span className="text-xl">→</span>
             </Link>
             <GuaranteeBadge variant="light" />
-            <div className="ml-0 md:ml-4">
-              <div className="text-sm text-cream/60">Dúvidas antes de comprar?</div>
-              <a
-                href="mailto:contato@doislabs.com.br"
-                className="text-xl border-b border-electric-blue pb-0.5"
-              >
-                contato@doislabs.com.br
-              </a>
+          </Reveal>
+
+          <Reveal
+            delay={3}
+            className="mt-16 pt-10 border-t border-cream/15 flex flex-wrap items-center justify-between gap-6"
+          >
+            <div className="flex items-center gap-5">
+              <span className="flex-none w-12 h-12 rounded-full bg-cream/10 border border-cream/20 grid place-items-center text-electric-blue">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <rect x="3" y="5" width="18" height="14" rx="2" />
+                  <path d="m3 7 9 6 9-6" />
+                </svg>
+              </span>
+              <div>
+                <div className="font-mono text-[11px] uppercase tracking-wider text-cream/60">
+                  Dúvidas antes de comprar?
+                </div>
+                <a
+                  href="mailto:contato@doislabs.com.br"
+                  className="inline-flex items-center gap-2 mt-1 font-serif italic text-cream hover:text-electric-blue transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-electric-blue"
+                  style={{ fontSize: "clamp(22px, 2.2vw, 32px)", letterSpacing: "-0.02em" }}
+                >
+                  contato@doislabs.com.br
+                  <span className="text-base not-italic" aria-hidden="true">→</span>
+                </a>
+              </div>
             </div>
+            <p className="font-mono text-[11px] uppercase tracking-wider text-cream/50 max-w-[260px]">
+              resposta em até 24h úteis · seg–sex
+            </p>
           </Reveal>
         </div>
       </section>
