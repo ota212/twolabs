@@ -12,6 +12,7 @@ import { Reveal } from "@/components/reveal";
 import { HighlightCard } from "@/components/highlight-card";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { ProcessStep } from "@/components/process-step";
+import { TestimonialCard, type Testimonial } from "@/components/testimonial-card";
 import { Product } from "@/types";
 
 export const metadata = {
@@ -64,6 +65,41 @@ const PROCESS = [
     n: "03",
     t: "Usar",
     d: "Arquivo chega no seu email em segundos. Abre, personaliza e já tá rodando.",
+  },
+];
+
+const HOME_TESTIMONIALS: Testimonial[] = [
+  {
+    name: "Mariana C.",
+    role: "MEI · Comércio",
+    location: "São Paulo/SP",
+    rating: 5,
+    text:
+      "A planilha MEI resolveu em uma tarde o que eu vinha empurrando há meses. Abri, preenchi, entendi o meu negócio — hoje mesmo.",
+  },
+  {
+    name: "Rafael B.",
+    role: "Dentista MEI",
+    location: "Belo Horizonte/MG",
+    rating: 5,
+    text:
+      "Parei de misturar pessoa física com CNPJ. Em 2 semanas eu já sabia exatamente quanto sobrava no fim do mês.",
+  },
+  {
+    name: "Júlia S.",
+    role: "Psicóloga · Autônoma",
+    location: "Curitiba/PR",
+    rating: 5,
+    text:
+      "Comprei o template de recibo e contrato — 15 minutos depois mandei pro meu primeiro paciente novo. Profissional, sem gastar com advogado de cara.",
+  },
+  {
+    name: "Eduardo L.",
+    role: "MEI · Serviços",
+    location: "Recife/PE",
+    rating: 4.5,
+    text:
+      "Planilha abre no Google Sheets sem quebrar nada. Uso no celular mesmo quando tô na rua. Melhor investimento de R$ 49 que fiz.",
   },
 ];
 
@@ -266,41 +302,31 @@ export default async function Home({
         </section>
       )}
 
-      {/* ─── QUOTE ─── */}
-      <section className="bg-navy text-cream px-10 py-24 md:py-32">
-        <Reveal className="max-w-[1200px] mx-auto">
-          <div className="flex gap-3 mb-8">
-            {[1, 2, 3, 4, 5].map((i) => (
-              <span key={i} className="text-2xl text-electric-blue">
-                ★
-              </span>
+      {/* ─── TESTIMONIALS ─── */}
+      <section className="px-10 py-24 md:py-32 border-b border-navy/10">
+        <div className="max-w-[1400px] mx-auto">
+          <Reveal className="flex justify-between items-end mb-16 flex-wrap gap-5">
+            <div>
+              <MonoLabel>[ 03.1 / depoimentos ]</MonoLabel>
+              <EditorialHeading size="xl" className="mt-5">
+                Quem usa <Italic>fala</Italic>.
+              </EditorialHeading>
+            </div>
+            <p className="font-mono text-[12px] tracking-wider uppercase text-muted max-w-[260px]">
+              4.9/5 · +200 avaliações verificadas
+            </p>
+          </Reveal>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {HOME_TESTIMONIALS.map((t, i) => (
+              <Reveal
+                key={i}
+                delay={Math.min(i + 1, 4) as 1 | 2 | 3 | 4}
+              >
+                <TestimonialCard {...t} />
+              </Reveal>
             ))}
           </div>
-          <blockquote
-            className="font-serif italic"
-            style={{
-              fontSize: "clamp(32px, 4.5vw, 64px)",
-              lineHeight: 1.08,
-              letterSpacing: "-0.02em",
-              maxWidth: 1100,
-            }}
-          >
-            “A planilha MEI resolveu em uma tarde o que eu vinha empurrando com
-            a barriga há meses. Abri, preenchi, entendi o meu negócio —
-            literalmente hoje mesmo.”
-          </blockquote>
-          <div className="mt-12 flex items-center gap-5">
-            <div className="w-14 h-14 rounded-full bg-cream text-navy grid place-items-center font-bold">
-              MC
-            </div>
-            <div>
-              <div className="text-base">Mariana C.</div>
-              <div className="font-mono text-sm text-cream/70">
-                MEI · São Paulo/SP
-              </div>
-            </div>
-          </div>
-        </Reveal>
+        </div>
       </section>
 
       {/* ─── PROCESS ─── */}
